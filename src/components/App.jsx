@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { Form } from '~~/Form/Form';
 import { Filter } from '~~/Filter/Filter';
 import { Contacts } from '~~/Contacts/Contacts';
-import users from '~/Users/Users';
+import users from '~/Users/users.json';
 
 export class App extends Component {
   state = {
