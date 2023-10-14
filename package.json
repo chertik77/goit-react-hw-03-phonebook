@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "d": "npm run lint && vite --open",
-    "b": "vite build --base=/ReactTemplate/",
+    "b": "vite build --base=/goit-react-hw-03-phonebook/",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src"
   },
   "dependencies": {
+    "nanoid": "^5.0.1",
+    "notiflix": "^3.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -25,6 +27,8 @@
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-tailwindcss": "^3.13.0",
     "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.6",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.2.2",
     "vite": "^4.4.5",

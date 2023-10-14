@@ -1,21 +1,60 @@
-import styles from './App.module.css';
+import { Component } from 'react';
+import { Form } from '~~/Form/Form';
+import { Filter } from '~~/Filter/Filter';
+import { Contacts } from '~~/Contacts/Contacts';
+import users from '../Users/users.json';
 
-export const App = () => (
-  <>
-    <h1 className={styles.title}>Hello, React</h1>
-  </>
-);
+export class App extends Component {
+  state = {
+    contacts: users,
+    filter: '',
+  };
 
-//! Або можна зробити ось так без import styles
+  componentDidMount() {
+    const savedContacts = localStorage.getItem('contacts');
+    if (!savedContacts) {
+      this.setState({ contacts: JSON.parse(savedContacts) });
+    }
+  }
 
-// export const App = () => (
-//   <>
-//     <h1 className="text-yellow-300 font-extrabold font-sans text-6xl">Hello, React</h1>
-//   </>
-// );
+  componentDidUpdate(_prevProps, prevState) {
+    if (prevState !== this.state) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
 
-//! Моя вам порада - оскільки ми використовуємо Tailwind,
-//! ми повністю позбавляємося CSS файлів, тому краще писати інлайн стилі,
-//! оскільки Tailwind сам все зробить за нас, а також неперевершено оптимізує
-//! CSS файли, тому бийте компоненти на маленькі під-компоненти
-//! щоб воно виглядало чисто, і постарайтеся повністю позбавитися від CSS файлів.
+  changeFilter = value =>
+    this.setState({
+      filter: value,
+    });
+
+  addNewUser = newUser =>
+    this.setState(({ contacts }) => ({
+      contacts: [newUser, ...contacts],
+    }));
+
+  visibleItems = () => {
+    return this.state.contacts.filter(contact => {
+      if (!this.state.filter) {
+        return this.state.contacts;
+      } else {
+        const topicFilter = this.state.filter.toLowerCase();
+        return contact.name.toLowerCase().includes(topicFilter);
+      }
+    });
+  };
+
+  deleteItem = id =>
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== id),
+    }));
+
+  render = () => (
+    <>
+      <h1 className='mb-3 font-mono text-white'>PhoneBook</h1>
+      <Form contacts={this.state.contacts} newUser={this.addNewUser} />
+      <Filter onChangeFilter={this.changeFilter} />
+      <Contacts title='Statistics:' items={this.visibleItems()} onDeleteItem={this.deleteItem} />
+    </>
+  );
+}
