@@ -1,8 +1,8 @@
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-function confirmForAddingNewUser(name, number, contactId, isUserExistsByNumber, addNewUser) {
-  return Confirm.show(
+const confirmForAddingNewUser = (name, number, contactId, isUserExistsByNumber, addNewUser) =>
+  Confirm.show(
     'Adding the user with the same name',
     `Do you want to add new user with the name ${name}? 
         You already have ${name} in your phonebook.`,
@@ -15,10 +15,8 @@ function confirmForAddingNewUser(name, number, contactId, isUserExistsByNumber, 
       addNewUser(contactId, name, number);
     }
   );
-}
 
-function userIsAlreadyExistsByNumber(number) {
-  return Notify.failure(`User with number ${number} is already exist in your phonebook!`);
-}
+const userIsAlreadyExistsByNumber = number =>
+  Notify.failure(`User with number ${number} is already exist in your phonebook!`);
 
 export { confirmForAddingNewUser, userIsAlreadyExistsByNumber };

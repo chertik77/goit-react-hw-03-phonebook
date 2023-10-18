@@ -35,12 +35,11 @@ export class App extends Component {
 
   visibleItems = () => {
     return this.state.contacts.filter(contact => {
-      if (!this.state.filter) {
-        return this.state.contacts;
-      } else {
-        const topicFilter = this.state.filter.toLowerCase();
-        return contact.name.toLowerCase().includes(topicFilter);
-      }
+      const topicFilter = this.state.filter.toLowerCase();
+      return (
+        contact.name.toLowerCase().includes(topicFilter) ||
+        contact.number.split('-').join('').includes(topicFilter)
+      );
     });
   };
 
