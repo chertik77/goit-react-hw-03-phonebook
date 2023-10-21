@@ -35,7 +35,7 @@ export const App = () => {
       <h1 className='mb-3 font-mono text-white'>PhoneBook</h1>
       <Form contacts={contacts} newUser={addNewUser} />
       <Filter onChangeFilter={changeFilter} />
-      <Contacts title='Statistics:' items={visibleItems()} onDeleteItem={deleteItem} />
+      <Contacts title='Contacts:' items={visibleItems()} onDeleteItem={deleteItem} />
     </>
   );
 };
