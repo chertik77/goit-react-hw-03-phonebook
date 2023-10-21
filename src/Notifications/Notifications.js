@@ -4,7 +4,7 @@ const confirmForAddingSameUser = (name, number, contactId, addNewUser) =>
   Confirm.show(
     'Adding the same user',
     `Do you want to add same user? 
-        You already have ${name}${number} in your phonebook.`,
+        You already have ${name} - ${number} in your phonebook.`,
     'Yes',
     'No',
     () => {
