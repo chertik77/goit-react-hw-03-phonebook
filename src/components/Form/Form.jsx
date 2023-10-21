@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import {
-  confirmForAddingNewUser,
-  userIsAlreadyExistsByNumber,
+  confirmForAddingSameUser,
+  confirmForAddingSameUserName,
+  confirmForAddingSameUserNumber,
 } from '~/Notifications/Notifications';
 
 export const Form = ({ contacts, newUser }) => {
@@ -13,11 +14,14 @@ export const Form = ({ contacts, newUser }) => {
     e.preventDefault();
     const contactId = nanoid();
 
-    if (isUserExistsByName(name)) {
-      confirmForAddingNewUser(name, number, isUserExistsByNumber, contactId, addNewUser);
+    if (isUserExistsByName(name) && isUserExistsByNumber(number)) {
+      confirmForAddingSameUser(name, number, contactId, addNewUser);
+      return resetForm();
+    } else if (isUserExistsByName(name)) {
+      confirmForAddingSameUserName(name, number, contactId, addNewUser);
       return resetForm();
     } else if (isUserExistsByNumber(number)) {
-      userIsAlreadyExistsByNumber(number);
+      confirmForAddingSameUserNumber(name, number, contactId, addNewUser);
       return resetForm();
     } else {
       addNewUser(contactId, name, number);

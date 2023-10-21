@@ -1,22 +1,44 @@
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const confirmForAddingNewUser = (name, number, isUserExistsByNumber, contactId, addNewUser) =>
+const confirmForAddingSameUser = (name, number, contactId, addNewUser) =>
   Confirm.show(
-    'Adding the user with the same name',
-    `Do you want to add new user with the name ${name}? 
-        You already have ${name} in your phonebook.`,
+    'Adding the same user',
+    `Do you want to add same user? 
+        You already have ${name}${number} in your phonebook.`,
     'Yes',
     'No',
     () => {
-      if (isUserExistsByNumber(number)) {
-        return userIsAlreadyExistsByNumber(number);
-      }
       addNewUser(contactId, name, number);
     }
   );
 
-const userIsAlreadyExistsByNumber = number =>
-  Notify.failure(`User with number ${number} is already exist in your phonebook!`);
+const confirmForAddingSameUserName = (name, number, contactId, addNewUser) =>
+  Confirm.show(
+    'Adding the user with the same name',
+    `Do you want to add user with the same name? 
+        You already have ${name} in your phonebook.`,
+    'Yes',
+    'No',
+    () => {
+      addNewUser(contactId, name, number);
+    }
+  );
+const confirmForAddingSameUserNumber = (name, number, contactId, addNewUser) =>
+  Confirm.show(
+    'Adding the user with the same number',
+    `Do you want to add user with the same number? 
+        You already have ${name} with number ${number} in your phonebook.`,
+    'Yes',
+    'No',
+    () => {
+      addNewUser(contactId, name, number);
+    },
+    () => {},
+    {
+      width: '320px',
+      titleMaxLength: 36,
+      messageMaxLength: 112,
+    }
+  );
 
-export { confirmForAddingNewUser, userIsAlreadyExistsByNumber };
+export { confirmForAddingSameUser, confirmForAddingSameUserName, confirmForAddingSameUserNumber };
