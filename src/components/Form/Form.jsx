@@ -1,74 +1,68 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import {
   confirmForAddingNewUser,
   userIsAlreadyExistsByNumber,
 } from '~/Notifications/Notifications';
 
-export class Form extends Component {
-  state = {
-    name: '',
-    number: '',
-  };
+export const Form = ({ contacts, newUser }) => {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
 
-  onFormSubmit = e => {
+  const onFormSubmit = e => {
     e.preventDefault();
     const contactId = nanoid();
-    const name = this.state.name;
-    const number = this.state.number;
 
-    if (this.isUserExistsByName(name)) {
-      confirmForAddingNewUser(name, number, contactId, this.isUserExistsByNumber, this.addNewUser);
-      return this.resetForm();
-    } else if (this.isUserExistsByNumber(number)) {
+    if (isUserExistsByName(name)) {
+      confirmForAddingNewUser(name, number, isUserExistsByNumber, contactId, addNewUser);
+      return resetForm();
+    } else if (isUserExistsByNumber(number)) {
       userIsAlreadyExistsByNumber(number);
-      return this.resetForm();
+      return resetForm();
     } else {
-      this.addNewUser(contactId, name, number);
+      addNewUser(contactId, name, number);
     }
   };
 
-  isUserExistsByName = name =>
-    this.props.contacts.some(contact => {
+  const isUserExistsByName = name =>
+    contacts.some(contact => {
       const contactNameToCheck = contact.name.toLowerCase();
       const inputNameToCheck = name.toLowerCase();
       return contactNameToCheck.split(' ').includes(inputNameToCheck);
     });
 
-  isUserExistsByNumber = number => this.props.contacts.some(contact => contact.number === number);
+  const isUserExistsByNumber = number => contacts.some(contact => contact.number === number);
 
-  addNewUser = (id, name, number) => {
-    const newContact = { id, name, number };
-    this.props.newUser(newContact);
-    this.resetForm();
+  const addNewUser = (id, name, number) => {
+    newUser({ id, name, number });
+    resetForm();
   };
 
-  resetForm = () =>
-    this.setState({
-      name: '',
-      number: '',
-    });
+  const resetForm = () => {
+    setName('');
+    setNumber('');
+  };
 
-  render = () => (
-    <form onSubmit={this.onFormSubmit}>
+  return (
+    <form onSubmit={onFormSubmit}>
       <input
         type='text'
-        value={this.state.name}
+        value={name}
         name='name'
         required
         className='mb-2 block'
-        onChange={({ target: { value } }) => this.setState({ name: value })}
+        onChange={({ target: { value } }) => setName(value)}
       />
       <input
         type='tel'
-        value={this.state.number}
+        value={number}
         name='number'
         required
-        onChange={({ target: { value } }) => this.setState({ number: value })}
+        onChange={({ target: { value } }) => setNumber(value)}
       />
       <button type='submit' className='bg-orange-400'>
         Add contact
       </button>
     </form>
   );
-}
+};

@@ -1,7 +1,7 @@
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-const confirmForAddingNewUser = (name, number, contactId, isUserExistsByNumber, addNewUser) =>
+const confirmForAddingNewUser = (name, number, isUserExistsByNumber, contactId, addNewUser) =>
   Confirm.show(
     'Adding the user with the same name',
     `Do you want to add new user with the name ${name}? 
