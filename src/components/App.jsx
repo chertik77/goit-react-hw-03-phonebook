@@ -32,7 +32,7 @@ export const App = () => {
 
   return (
     <>
-      <h1 className='mb-3 font-mono text-white'>PhoneBook</h1>
+      <h1 className='mb-10 text-center font-serif text-4xl text-white'>PhoneBook</h1>
       <Form contacts={contacts} newUser={addNewUser} />
       <Filter onChangeFilter={changeFilter} />
       <Contacts title='Contacts:' items={visibleItems()} onDeleteItem={deleteItem} />

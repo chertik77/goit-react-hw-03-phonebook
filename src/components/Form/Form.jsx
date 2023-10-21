@@ -54,7 +54,8 @@ export const Form = ({ contacts, newUser }) => {
         value={name}
         name='name'
         required
-        className='mb-2 block'
+        className='mx-auto mb-4 block h-9 rounded p-2 font-serif placeholder:text-sm'
+        placeholder='Enter name'
         onChange={({ target: { value } }) => setName(value)}
       />
       <input
@@ -62,9 +63,14 @@ export const Form = ({ contacts, newUser }) => {
         value={number}
         name='number'
         required
+        className='mx-auto mb-6 block h-9 rounded p-2 font-serif placeholder:text-sm'
+        placeholder='Enter number'
         onChange={({ target: { value } }) => setNumber(value)}
       />
-      <button type='submit' className='bg-orange-400'>
+      <button
+        type='submit'
+        className='mx-auto block rounded-md bg-orange-400 px-5 py-2 font-serif text-white'
+      >
         Add contact
       </button>
     </form>
