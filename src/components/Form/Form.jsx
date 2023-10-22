@@ -12,7 +12,6 @@ export const Form = ({ contacts, newUser }) => {
 
     if (isUserExistsByName(name) && isUserExistsByNumber(number)) {
       showConfirmMessage(
-        'Adding the same user',
         `Do you want to add the same user? You already have ${name} - ${number} in your phonebook.`,
         name,
         number,
@@ -21,7 +20,6 @@ export const Form = ({ contacts, newUser }) => {
       );
     } else if (isUserExistsByName(name)) {
       showConfirmMessage(
-        'Adding the user with the same name',
         `Do you want to add a user with the same name? You already have ${name} in your phonebook.`,
         name,
         number,
@@ -30,7 +28,6 @@ export const Form = ({ contacts, newUser }) => {
       );
     } else if (isUserExistsByNumber(number)) {
       showConfirmMessage(
-        'Adding the user with the same number',
         `Do you want to add a user with the same number? You already have ${name} with number ${number} in your phonebook.`,
         name,
         number,

@@ -1,8 +1,8 @@
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
-export const showConfirmMessage = (title, message, name, number, contactId, newUser) =>
+export const showConfirmMessage = (message, name, number, contactId, newUser) =>
   Confirm.show(
-    title,
+    "Adding the same user",
     message,
     'Yes',
     'No',
