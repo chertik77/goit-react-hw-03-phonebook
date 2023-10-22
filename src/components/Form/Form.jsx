@@ -17,7 +17,7 @@ export const Form = ({ contacts, newUser }) => {
         name,
         number,
         contactId,
-        addNewUser
+        newUser
       );
     } else if (isUserExistsByName(name)) {
       showConfirmMessage(
@@ -26,7 +26,7 @@ export const Form = ({ contacts, newUser }) => {
         name,
         number,
         contactId,
-        addNewUser
+        newUser
       );
     } else if (isUserExistsByNumber(number)) {
       showConfirmMessage(
@@ -35,7 +35,7 @@ export const Form = ({ contacts, newUser }) => {
         name,
         number,
         contactId,
-        addNewUser
+        newUser
       );
     } else {
       addNewUser(contactId, name, number);
@@ -51,10 +51,6 @@ export const Form = ({ contacts, newUser }) => {
     });
 
   const isUserExistsByNumber = number => contacts.some(contact => contact.number === number);
-
-  const addNewUser = (id, name, number) => {
-    newUser({ id, name, number });
-  };
 
   const resetForm = () => {
     setName('');
