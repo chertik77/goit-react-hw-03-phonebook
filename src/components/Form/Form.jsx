@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import {
-  confirmForAddingSameUser,
-  confirmForAddingSameUserName,
-  confirmForAddingSameUserNumber,
-} from '~/Notifications/Notifications';
+import { showConfirmMessage } from '~/Notifications/Notifications';
 
 export const Form = ({ contacts, newUser }) => {
   const [name, setName] = useState('');
@@ -15,17 +11,36 @@ export const Form = ({ contacts, newUser }) => {
     const contactId = nanoid();
 
     if (isUserExistsByName(name) && isUserExistsByNumber(number)) {
-      confirmForAddingSameUser(name, number, contactId, addNewUser);
-      return resetForm();
+      showConfirmMessage(
+        'Adding the same user',
+        `Do you want to add the same user? You already have ${name} - ${number} in your phonebook.`,
+        name,
+        number,
+        contactId,
+        addNewUser
+      );
     } else if (isUserExistsByName(name)) {
-      confirmForAddingSameUserName(name, number, contactId, addNewUser);
-      return resetForm();
+      showConfirmMessage(
+        'Adding the user with the same name',
+        `Do you want to add a user with the same name? You already have ${name} in your phonebook.`,
+        name,
+        number,
+        contactId,
+        addNewUser
+      );
     } else if (isUserExistsByNumber(number)) {
-      confirmForAddingSameUserNumber(name, number, contactId, addNewUser);
-      return resetForm();
+      showConfirmMessage(
+        'Adding the user with the same number',
+        `Do you want to add a user with the same number? You already have ${name} with number ${number} in your phonebook.`,
+        name,
+        number,
+        contactId,
+        addNewUser
+      );
     } else {
       addNewUser(contactId, name, number);
     }
+    resetForm();
   };
 
   const isUserExistsByName = name =>
