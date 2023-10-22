@@ -15,13 +15,7 @@ export const Form = ({ contacts, newUser }) => {
       isUserExistsByName(name) ||
       isUserExistsByNumber(number)
     ) {
-      showConfirmMessage(
-        `Do you want to add the same user? You already have ${name} - ${number} in your phonebook.`,
-        name,
-        number,
-        contactId,
-        newUser
-      );
+      showConfirmMessage(name, number, contactId, newUser);
     } else {
       newUser({ contactId, name, number });
     }
