@@ -54,7 +54,6 @@ export const Form = ({ contacts, newUser }) => {
 
   const addNewUser = (id, name, number) => {
     newUser({ id, name, number });
-    resetForm();
   };
 
   const resetForm = () => {
