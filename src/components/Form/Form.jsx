@@ -38,7 +38,7 @@ export const Form = ({ contacts, newUser }) => {
         newUser
       );
     } else {
-      addNewUser(contactId, name, number);
+      newUser({ contactId, name, number });
     }
     resetForm();
   };
