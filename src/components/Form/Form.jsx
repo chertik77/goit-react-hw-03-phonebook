@@ -10,25 +10,13 @@ export const Form = ({ contacts, newUser }) => {
     e.preventDefault();
     const contactId = nanoid();
 
-    if (isUserExistsByName(name) && isUserExistsByNumber(number)) {
+    if (
+      (isUserExistsByName(name) && isUserExistsByNumber(number)) ||
+      isUserExistsByName(name) ||
+      isUserExistsByNumber(number)
+    ) {
       showConfirmMessage(
         `Do you want to add the same user? You already have ${name} - ${number} in your phonebook.`,
-        name,
-        number,
-        contactId,
-        newUser
-      );
-    } else if (isUserExistsByName(name)) {
-      showConfirmMessage(
-        `Do you want to add a user with the same name? You already have ${name} in your phonebook.`,
-        name,
-        number,
-        contactId,
-        newUser
-      );
-    } else if (isUserExistsByNumber(number)) {
-      showConfirmMessage(
-        `Do you want to add a user with the same number? You already have ${name} with number ${number} in your phonebook.`,
         name,
         number,
         contactId,
