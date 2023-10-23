@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { showConfirmMessage } from '~/Notifications/Notifications';
+import { isUserExistsByName, isUserExistsByNumber } from '../../helpers/IsUserExists';
 
 export const Form = ({ contacts, newUser }) => {
   const [name, setName] = useState('');
@@ -8,28 +9,21 @@ export const Form = ({ contacts, newUser }) => {
 
   const onFormSubmit = e => {
     e.preventDefault();
-    const contactId = nanoid();
+    const id = nanoid();
+    const hasSameUserName = isUserExistsByName(contacts, name);
+    const hasSameUserNumber = isUserExistsByNumber(contacts, number);
 
-    if (
-      (isUserExistsByName(name) && isUserExistsByNumber(number)) ||
-      isUserExistsByName(name) ||
-      isUserExistsByNumber(number)
-    ) {
-      showConfirmMessage(name, number, contactId, newUser);
+    if ((hasSameUserName && hasSameUserNumber) || hasSameUserName || hasSameUserNumber) {
+      showConfirmMessage(
+        `Do you want to add the same user? You already have ${name} - ${number} in your phonebook.`
+      ).then(() => {
+        newUser({ id, name, number });
+      });
     } else {
-      newUser({ contactId, name, number });
+      newUser({ id, name, number });
     }
     resetForm();
   };
-
-  const isUserExistsByName = name =>
-    contacts.some(contact => {
-      const contactNameToCheck = contact.name.toLowerCase();
-      const inputNameToCheck = name.toLowerCase();
-      return contactNameToCheck.split(' ').includes(inputNameToCheck);
-    });
-
-  const isUserExistsByNumber = number => contacts.some(contact => contact.number === number);
 
   const resetForm = () => {
     setName('');
