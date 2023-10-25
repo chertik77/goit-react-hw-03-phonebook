@@ -12,8 +12,9 @@ export const Form = ({ contacts, newUser }) => {
     const id = nanoid();
     const hasSameUserName = isUserExistsByName(contacts, name);
     const hasSameUserNumber = isUserExistsByNumber(contacts, number);
+    const hasSameUser = hasSameUserName && hasSameUserNumber;
 
-    if ((hasSameUserName && hasSameUserNumber) || hasSameUserName || hasSameUserNumber) {
+    if (hasSameUser || hasSameUserName || hasSameUserNumber) {
       showConfirmMessage(
         `Do you want to add the same user? You already have ${name} - ${number} in your phonebook.`
       ).then(() => {
