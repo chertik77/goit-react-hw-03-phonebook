@@ -5,6 +5,9 @@ import FullReload from 'vite-plugin-full-reload';
 
 export default defineConfig({
   plugins: [react(), FullReload(['./**/**.html'])],
+  build: {
+    minify: 'terser',
+  },
   resolve: {
     alias: {
       '~': fileURLToPath(new URL('./src', import.meta.url)),

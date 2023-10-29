@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Form } from '~~/Form/Form';
-import { Filter } from '~~/Filter/Filter';
-import { Contacts } from '~~/Contacts/Contacts';
+import { useEffect, useState } from 'react';
 import users from '~/Users/users.json';
+import { Contacts } from '~~/Contacts/Contacts';
+import { Filter } from '~~/Filter/Filter';
+import { Form } from './Form/Form';
 
 export const App = () => {
   const [contacts, setContacts] = useState(users);
