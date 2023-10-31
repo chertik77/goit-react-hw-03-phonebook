@@ -1,10 +1,10 @@
 import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
 
-export const showConfirmMessage = message =>
+export const showConfirmMessage = () =>
   new Promise(resolve =>
     Confirm.show(
       'Adding the same user',
-      message,
+      'Do you want to add the same user?',
       'Yes',
       'No',
       () => {

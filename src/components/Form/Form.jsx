@@ -1,25 +1,21 @@
-import { useState } from 'react';
 import { nanoid } from 'nanoid';
+import { useState } from 'react';
 import { showConfirmMessage } from '~/Notifications/Notifications';
 import { isUserExistsByName, isUserExistsByNumber } from '../../helpers/IsUserExists';
 
 export const Form = ({ contacts, newUser }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const hasSameUserName = isUserExistsByName(contacts, name);
+  const hasSameUserNumber = isUserExistsByNumber(contacts, number);
+  const hasSameUser = hasSameUserName && hasSameUserNumber;
+  const id = nanoid();
 
   const onFormSubmit = e => {
     e.preventDefault();
-    const id = nanoid();
-    const hasSameUserName = isUserExistsByName(contacts, name);
-    const hasSameUserNumber = isUserExistsByNumber(contacts, number);
-    const hasSameUser = hasSameUserName && hasSameUserNumber;
 
     if (hasSameUser || hasSameUserName || hasSameUserNumber) {
-      showConfirmMessage(
-        `Do you want to add the same user? You already have ${name} - ${number} in your phonebook.`
-      ).then(() => {
-        newUser({ id, name, number });
-      });
+      showConfirmMessage().then(() => newUser({ id, name, number }));
     } else {
       newUser({ id, name, number });
     }
