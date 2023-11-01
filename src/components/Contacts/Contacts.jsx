@@ -9,12 +9,11 @@ export const Contacts = ({ title, items, onDeleteItem }) => (
           <button
             type='button'
             className='rounded-md bg-red-600 px-5 py-2 font-serif text-white'
-            onClick={() => onDeleteItem(id)}
-          >
+            onClick={() => onDeleteItem(id)}>
             Delete
           </button>
         </li>
       ))}
     </ul>
   </>
-);
+)

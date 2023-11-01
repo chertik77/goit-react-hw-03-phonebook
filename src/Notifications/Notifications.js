@@ -1,4 +1,4 @@
-import { Confirm } from 'notiflix/build/notiflix-confirm-aio';
+import { Confirm } from 'notiflix/build/notiflix-confirm-aio'
 
 export const showConfirmMessage = () =>
   new Promise(resolve =>
@@ -8,9 +8,9 @@ export const showConfirmMessage = () =>
       'Yes',
       'No',
       () => {
-        resolve();
+        resolve()
       },
       () => {},
       { width: '320px', titleMaxLength: 36, messageMaxLength: 112 }
     )
-  );
+  )

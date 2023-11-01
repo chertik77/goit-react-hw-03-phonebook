@@ -8,4 +8,4 @@ export const Filter = ({ onChangeFilter }) => (
       onChange={({ target: { value } }) => onChangeFilter(value)}
     />
   </>
-);
+)
