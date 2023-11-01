@@ -1,23 +1,25 @@
 import { nanoid } from 'nanoid'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { showConfirmMessage } from '../../Notifications/Notifications'
-import { isUserExistsByName, isUserExistsByNumber } from '../../helpers/IsUserExists'
+import { IsUserExistsByName, IsUserExistsByNumber } from '../../helpers/IsUserExists'
+import { newUser } from '../../redux/contactsSlice'
 
-export const Form = ({ contacts, newUser }) => {
+export const Form = () => {
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
-  const hasSameUserName = isUserExistsByName(contacts, name)
-  const hasSameUserNumber = isUserExistsByNumber(contacts, number)
+  const hasSameUserName = IsUserExistsByName(name)
+  const hasSameUserNumber = IsUserExistsByNumber(number)
   const hasSameUser = hasSameUserName && hasSameUserNumber
   const id = nanoid()
+  const dispath = useDispatch()
 
   const onFormSubmit = e => {
     e.preventDefault()
-
     if (hasSameUser || hasSameUserName || hasSameUserNumber) {
-      showConfirmMessage().then(() => newUser({ id, name, number }))
+      showConfirmMessage().then(() => dispath(newUser({ id, name, number })))
     } else {
-      newUser({ id, name, number })
+      dispath(newUser({ id, name, number }))
     }
     resetForm()
   }
