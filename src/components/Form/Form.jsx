@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { showConfirmMessage } from '../../Notifications/Notifications'
@@ -11,15 +10,14 @@ export const Form = () => {
   const hasSameUserName = IsUserExistsByName(name)
   const hasSameUserNumber = IsUserExistsByNumber(number)
   const hasSameUser = hasSameUserName && hasSameUserNumber
-  const id = nanoid()
   const dispath = useDispatch()
 
   const onFormSubmit = e => {
     e.preventDefault()
     if (hasSameUser || hasSameUserName || hasSameUserNumber) {
-      showConfirmMessage().then(() => dispath(newUser({ id, name, number })))
+      showConfirmMessage().then(() => dispath(newUser(name, number)))
     } else {
-      dispath(newUser({ id, name, number }))
+      dispath(newUser(name, number))
     }
     resetForm()
   }
