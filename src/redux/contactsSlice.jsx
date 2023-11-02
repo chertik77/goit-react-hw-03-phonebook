@@ -10,11 +10,11 @@ const contactsSlice = createSlice({
       reducer(state, action) {
         return [action.payload, ...state]
       },
-      prepare(userName, userNumber) {
+      prepare(name, number) {
         return {
           payload: {
-            name: userName,
-            number: userNumber,
+            name,
+            number,
             id: nanoid()
           }
         }
@@ -27,4 +27,4 @@ const contactsSlice = createSlice({
 })
 
 export const contactReducer = contactsSlice.reducer
-export const { newUser, deleteUser } = contactsSlice.actions
+export const { newUser, deleteUser, filterContacts } = contactsSlice.actions
