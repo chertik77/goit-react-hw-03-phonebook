@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { showConfirmMessage } from '../../Notifications/Notifications'
-import { IsUserExistsByName, IsUserExistsByNumber } from '../../helpers/IsUserExists'
-import { newUser } from '../../redux/contactsSlice'
+import { showConfirmMessage } from '~/Notifications/Notifications'
+import { IsUserExistsByName, IsUserExistsByNumber } from '~/helpers/IsUserExists'
+import { newUser } from '~/redux/contactsSlice'
 
 export const Form = () => {
   const [name, setName] = useState('')

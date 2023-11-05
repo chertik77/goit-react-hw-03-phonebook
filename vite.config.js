@@ -3,5 +3,8 @@ import { defineConfig } from 'vite'
 import FullReload from 'vite-plugin-full-reload'
 
 export default defineConfig({
-  plugins: [react(), FullReload(['./**/**.html'])]
+  plugins: [react(), FullReload(['./**/**.html'])],
+  resolve: {
+    alias: [{ find: '~', replacement: '/src' }]
+  }
 })

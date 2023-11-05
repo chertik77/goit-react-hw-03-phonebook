@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteUser } from '../../redux/contactsSlice'
+import { deleteUser } from '~/redux/contactsSlice'
 
 export const Contacts = () => {
   const { contacts, filter } = useSelector(state => state)

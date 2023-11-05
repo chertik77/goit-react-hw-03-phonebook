@@ -1,6 +1,4 @@
-import { Contacts } from './Contacts/Contacts'
-import { Filter } from './Filter/Filter'
-import { Form } from './Form/Form'
+import { Contacts, Filter, Form } from '~/components'
 
 export const App = () => (
   <>
