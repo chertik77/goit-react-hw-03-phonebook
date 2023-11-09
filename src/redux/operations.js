@@ -10,7 +10,6 @@ export const deleteContactById = createAsyncThunk('contacts/deleteContact', asyn
   const response = await axios.delete(`/contacts/${id}`)
   return response.data.id
 })
-console.log(fetchContacts())
 
 export const addNewUser = createAsyncThunk('contacts/addContact', async userData => {
   const response = await axios.post('/contacts', {
