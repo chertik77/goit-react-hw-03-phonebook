@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
+import toast from 'react-hot-toast'
 import { ThreeDots } from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
 import { showError } from '~/Notifications/toast'
-import { deleteUser } from '~/redux/contactsSlice'
-import { fetchContacts } from '~/redux/operations'
+import { deleteContactById, fetchContacts } from '~/redux/operations'
 import { filteredContacts, selectContactsInfo } from '~/redux/selectors'
 
 export const Contacts = () => {
@@ -18,8 +18,8 @@ export const Contacts = () => {
 
   return (
     <>
-      <h2 className='mb-5 text-center font-serif text-4xl text-white'>Contacts:</h2>
-      <ul className='flex w-96 flex-col items-center justify-end gap-3'>
+      <h2 className='text-center font-serif text-4xl mb-5'>Contacts:</h2>
+      <ul className='gap-3 flex w-96 items-center justify-end flex-col'>
         {error && showError()}
         {isLoading && (
           <ThreeDots
@@ -34,12 +34,17 @@ export const Contacts = () => {
         {showContacts &&
           filterContacts.map(({ id, name, phone }) => (
             <li key={id} className='flex items-center justify-end gap-2'>
-              <p className='text-white'>{name}</p>
-              <p className='text-white'>{phone}</p>
+              <p>{name}</p>
+              <p>{phone}</p>
               <button
                 type='button'
-                className='rounded-md bg-red-600 px-5 py-2 font-serif text-white'
-                onClick={() => dispatch(deleteUser(id))}>
+                className='rounded-md bg-red-600 px-5 py-2 font-serif'
+                onClick={() =>
+                  toast.promise(dispatch(deleteContactById(id)), {
+                    loading: 'Deleting...',
+                    success: 'Deleted!'
+                  })
+                }>
                 Delete
               </button>
             </li>

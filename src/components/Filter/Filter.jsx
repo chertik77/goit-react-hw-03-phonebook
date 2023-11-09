@@ -7,10 +7,10 @@ export const Filter = () => {
 
   return (
     <>
-      <h2 className='mb-5 mt-10 text-center font-serif text-4xl text-white'>Find contacts</h2>
+      <h2 className='mb-5 mt-10 text-center font-serif text-4xl'>Find contacts</h2>
       <input
         type='text'
-        className='mx-auto mb-6 block h-9 rounded p-2 font-serif placeholder:text-sm'
+        className='mx-auto mb-6 block h-9 rounded p-2 font-serif placeholder:text-sm text-black'
         placeholder='Find someone..'
         onChange={handleChange}
       />

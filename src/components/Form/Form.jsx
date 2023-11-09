@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import toast from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import { showConfirmMessage } from '~/Notifications/confirm'
 import { IsUserExistsByName, IsUserExistsByNumber } from '~/helpers/IsUserExists'
-import { newUser } from '~/redux/contactsSlice'
+import { addNewUser } from '~/redux/operations'
 
 export const Form = () => {
   const [name, setName] = useState('')
@@ -15,9 +16,17 @@ export const Form = () => {
   const onFormSubmit = e => {
     e.preventDefault()
     if (hasSameUser || hasSameUserName || hasSameUserNumber) {
-      showConfirmMessage().then(() => dispath(newUser(name, number)))
+      showConfirmMessage().then(() =>
+        toast.promise(dispath(addNewUser({ name, number })), {
+          loading: 'Adding new user...',
+          success: 'Added!'
+        })
+      )
     } else {
-      dispath(newUser(name, number))
+      toast.promise(dispath(addNewUser({ name, number })), {
+        loading: 'Adding new user...',
+        success: 'Added!'
+      })
     }
     resetForm()
   }
@@ -29,14 +38,13 @@ export const Form = () => {
 
   return (
     <>
-      <h1 className='mb-10 text-center font-serif text-4xl text-white'>PhoneBook</h1>
       <form onSubmit={onFormSubmit}>
         <input
           type='text'
           value={name}
           name='name'
           required
-          className='mx-auto mb-4 block h-9 rounded p-2 font-serif placeholder:text-sm'
+          className='mx-auto mb-4 block h-9 rounded p-2 font-serif placeholder:text-sm text-black'
           placeholder='Enter name'
           onChange={({ target: { value } }) => setName(value)}
         />
@@ -45,13 +53,11 @@ export const Form = () => {
           value={number}
           name='number'
           required
-          className='mx-auto mb-6 block h-9 rounded p-2 font-serif placeholder:text-sm'
+          className='mx-auto mb-6 block h-9 rounded p-2 font-serif placeholder:text-sm text-black'
           placeholder='Enter number'
           onChange={({ target: { value } }) => setNumber(value)}
         />
-        <button
-          type='submit'
-          className='mx-auto block rounded-md bg-orange-400 px-5 py-2 font-serif text-white'>
+        <button type='submit' className='mx-auto block rounded-md bg-orange-400 px-5 py-2 font-serif'>
           Add contact
         </button>
       </form>
