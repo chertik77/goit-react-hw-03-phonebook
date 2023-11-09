@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 
 export const IsUserExistsByName = name => {
-  const contacts = useSelector(state => state.contacts)
+  const contacts = useSelector(state => state.contacts.items)
   return contacts.some(contact => {
     const contactNameToCheck = contact.name.toLowerCase()
     const inputNameToCheck = name.toLowerCase()
@@ -10,6 +10,6 @@ export const IsUserExistsByName = name => {
 }
 
 export const IsUserExistsByNumber = number => {
-  const contacts = useSelector(state => state.contacts)
+  const contacts = useSelector(state => state.contacts.items)
   return contacts.some(contact => contact.number === number)
 }

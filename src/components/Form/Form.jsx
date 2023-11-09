@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { showConfirmMessage } from '~/Notifications/Notifications'
+import { showConfirmMessage } from '~/Notifications/confirm'
 import { IsUserExistsByName, IsUserExistsByNumber } from '~/helpers/IsUserExists'
 import { newUser } from '~/redux/contactsSlice'
 
