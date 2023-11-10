@@ -3,7 +3,7 @@ import { addNewUser, deleteContactById, fetchContacts } from './operations'
 
 const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: { items: [] },
+  initialState: { items: [], isLoading: false, error: null },
   extraReducers: builder => {
     builder.addCase(fetchContacts.pending, state => {
       state.isLoading = true

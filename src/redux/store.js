@@ -3,14 +3,12 @@ import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { contactReducer } from './contactsSlice'
 import { filterReducer } from './filterSlice'
-import { contactsTransform } from './transform'
 
 const rootReducer = combineReducers({ contacts: contactReducer, filter: filterReducer })
 const persistConfig = {
   key: 'contacts',
   storage,
-  blacklist: ['filter', '_persist'],
-  transforms: [contactsTransform]
+  blacklist: ['filter', '_persist']
 }
 
 export const store = configureStore({
