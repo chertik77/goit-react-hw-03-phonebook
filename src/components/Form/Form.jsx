@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { showConfirmMessage } from '~/Notifications/confirm'
 import { IsUserExistsByName, IsUserExistsByNumber } from '~/helpers/IsUserExists'
-import { promiseToast } from '~/notifications/toast'
 import { addNewUser } from '~/redux/operations'
 
 export const Form = () => {
@@ -16,19 +15,9 @@ export const Form = () => {
   const onFormSubmit = e => {
     e.preventDefault()
     if (hasSameUser || hasSameUserName || hasSameUserNumber) {
-      showConfirmMessage().then(() =>
-        promiseToast(dispath(addNewUser({ name, number })), {
-          loading: 'Adding new user...',
-          success: data => `${data.payload.name} added successfully!`,
-          error: 'There was an error, please try again.'
-        })
-      )
+      showConfirmMessage().then(() => dispath(addNewUser({ name, number })))
     } else {
-      promiseToast(dispath(addNewUser({ name, number })), {
-        loading: 'Adding new user...',
-        success: data => `${data.payload.name} added successfully!`,
-        error: 'There was an error, please try again.'
-      })
+      dispath(addNewUser({ name, number }))
     }
     resetForm()
   }
