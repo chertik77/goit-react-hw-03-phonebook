@@ -3,7 +3,7 @@ import { MutatingDots } from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteContactById, fetchContacts } from '~/redux/operations'
 import { filteredContacts } from '~/redux/selectors'
-import { promiseToast } from '../../notifications/toast'
+import { promiseToast } from '../../Notifications/toast'
 
 export const Contacts = () => {
   const { isLoading } = useSelector(state => state.contacts)
