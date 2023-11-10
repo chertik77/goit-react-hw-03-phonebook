@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { MutatingDots } from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
-import { promiseToast } from '~/notifications/toast'
+import { promiseToast } from '~/Notifications/toast'
 import { deleteContactById, fetchContacts } from '~/redux/operations'
 import { filteredContacts } from '~/redux/selectors'
 
