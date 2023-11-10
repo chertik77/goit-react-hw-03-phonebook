@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { promiseToast } from '~/notifications/toast'
 import { deleteContactById, fetchContacts } from '~/redux/operations'
 import { filteredContacts } from '~/redux/selectors'
+import { promiseToast } from '../../notifications/toast'
 
 export const Contacts = () => {
   const filterContacts = useSelector(filteredContacts)
