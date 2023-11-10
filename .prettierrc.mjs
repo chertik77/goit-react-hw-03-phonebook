@@ -1,6 +1,3 @@
-module.exports = {
-  plugins: ['prettier-plugin-tailwindcss']
-}
 export default {
   printWidth: 110,
   tabWidth: 2,
