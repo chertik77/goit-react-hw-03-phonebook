@@ -2,25 +2,15 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteContactById, fetchContacts } from '~/redux/operations'
 import { filteredContacts } from '~/redux/selectors'
-import { promiseToast } from '~notifications/toast'
 
 export const Contacts = () => {
   const filterContacts = useSelector(filteredContacts)
   const dispatch = useDispatch()
 
-  const handleDelete = id =>
-    promiseToast(dispatch(deleteContactById(id)), {
-      loading: 'Deleting...',
-      success: 'Successfully deleted!',
-      error: 'Can not delete the contact.'
-    })
+  const handleDelete = id => dispatch(deleteContactById(id))
 
   useEffect(() => {
-    promiseToast(dispatch(fetchContacts()), {
-      loading: 'Loading your contacts...',
-      success: data => `Successfully loaded ${data.payload.length} contacts`,
-      error: 'Oops, someting went wrong, please try to reload the page.'
-    })
+    dispatch(fetchContacts())
   }, [dispatch])
 
   return (

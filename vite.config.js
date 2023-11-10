@@ -5,10 +5,7 @@ import FullReload from 'vite-plugin-full-reload'
 export default defineConfig({
   plugins: [react(), FullReload(['./**/**.html'])],
   resolve: {
-    alias: [
-      { find: '~', replacement: '/src' },
-      { find: '~notifications', replacement: '/src/notifications' }
-    ]
+    alias: [{ find: '~', replacement: '/src' }]
   },
   build: { assetsDir: '' }
 })
