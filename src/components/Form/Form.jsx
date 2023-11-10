@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { showConfirmMessage } from '~/Notifications/confirm'
 import { IsUserExistsByName, IsUserExistsByNumber } from '~/helpers/IsUserExists'
+import { showConfirmMessage } from '~/notifications/confirm'
 import { addNewUser } from '~/redux/operations'
 
 export const Form = () => {

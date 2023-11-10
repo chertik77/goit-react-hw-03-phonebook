@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { MutatingDots } from 'react-loader-spinner'
 import { useDispatch, useSelector } from 'react-redux'
+import { promiseToast } from '~/notifications/toast'
 import { deleteContactById, fetchContacts } from '~/redux/operations'
 import { filteredContacts } from '~/redux/selectors'
+
 export const Contacts = () => {
   const { isLoading } = useSelector(state => state.contacts)
   const filterContacts = useSelector(filteredContacts)
@@ -11,7 +13,9 @@ export const Contacts = () => {
   const handleDelete = id => dispatch(deleteContactById(id))
 
   useEffect(() => {
-    dispatch(fetchContacts())
+    promiseToast(dispatch(fetchContacts()), {
+      loading: 'loading..'
+    })
   }, [dispatch])
 
   return (
