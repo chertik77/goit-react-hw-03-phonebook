@@ -3,21 +3,21 @@ import { useDispatch } from 'react-redux'
 import { addNewUser } from '~/redux/operations'
 import { IsUserExistsByName, IsUserExistsByNumber } from '~/utils/functions/IsUserExists'
 import { showConfirmMessage } from '~/utils/notifications/confirm'
+import { promiseToast } from '~/utils/notifications/toast'
 
 export const Form = () => {
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
   const hasSameUserName = IsUserExistsByName(name)
   const hasSameUserNumber = IsUserExistsByNumber(number)
-  const hasSameUser = hasSameUserName && hasSameUserNumber
   const dispath = useDispatch()
 
   const onFormSubmit = e => {
     e.preventDefault()
-    if (hasSameUser || hasSameUserName || hasSameUserNumber) {
-      showConfirmMessage().then(() => dispath(addNewUser({ name, number })))
+    if (hasSameUserName || hasSameUserNumber) {
+      showConfirmMessage().then(() => promiseToast(dispath(addNewUser({ name, number }))))
     } else {
-      dispath(addNewUser({ name, number }))
+      promiseToast(dispath(addNewUser({ name, number })))
     }
     resetForm()
   }
