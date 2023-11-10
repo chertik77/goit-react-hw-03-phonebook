@@ -1,3 +1,4 @@
+import { InputMask } from 'primereact/inputmask'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { addNewUser } from '~/redux/operations'
@@ -39,14 +40,15 @@ export const Form = () => {
           placeholder='Enter name'
           onChange={e => setName(e.target.value)}
         />
-        <input
+        <InputMask
           type='tel'
           value={number}
           name='number'
           required
           className='mx-auto mb-6 block h-9 rounded p-2 font-serif placeholder:text-sm text-black'
-          placeholder='Enter number'
           onChange={e => setNumber(e.target.value)}
+          mask='999-999-9999'
+          placeholder='Phone: xxx-xxx-xxxx'
         />
         <button type='submit' className='mx-auto block rounded-md bg-orange-400 px-5 py-2 font-serif'>
           Add contact
