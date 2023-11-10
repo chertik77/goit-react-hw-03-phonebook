@@ -4,6 +4,7 @@ import { deleteContactById, fetchContacts } from '~/redux/operations'
 import { filteredContacts } from '~/redux/selectors'
 
 export const Contacts = () => {
+  const { isLoading } = useSelector(state => state.contacts)
   const filterContacts = useSelector(filteredContacts)
   const dispatch = useDispatch()
 
@@ -16,6 +17,7 @@ export const Contacts = () => {
   return (
     <>
       <h2 className='text-center font-serif text-4xl mb-5'>Contacts:</h2>
+      {isLoading && <div>Loading...</div>}
       <ul className='gap-3 flex w-96 items-center justify-end flex-col'>
         {filterContacts.map(({ id, name, phone }) => (
           <li key={id} className='flex items-center justify-end gap-2'>
