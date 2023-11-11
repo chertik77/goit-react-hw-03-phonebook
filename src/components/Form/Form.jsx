@@ -20,10 +20,6 @@ export const Form = () => {
     } else {
       promiseToast(dispath(addNewUser({ name, number })))
     }
-    resetForm()
-  }
-
-  const resetForm = () => {
     setName('')
     setNumber('')
   }
