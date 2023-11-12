@@ -1,3 +1,5 @@
+import 'primeicons/primeicons.css'
+import { ScrollTop } from 'primereact/scrolltop'
 import { Toaster } from 'react-hot-toast'
 import { Contacts, Filter, Form } from '~/components'
 
@@ -8,5 +10,9 @@ export const App = () => (
     <Filter />
     <Contacts />
     <Toaster />
+    <ScrollTop
+      className='w-2rem h-2rem border-round-md bg-white text-black'
+      icon='pi pi-chevron-up text-black'
+    />
   </>
 )
