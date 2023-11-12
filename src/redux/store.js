@@ -5,7 +5,7 @@ import { contactReducer } from './contactsSlice'
 import { filterReducer } from './filterSlice'
 
 const rootReducer = combineReducers({ contacts: contactReducer, filter: filterReducer })
-const persistConfig = { key: 'contacts', storage, blacklist: ['filter', '_persist'] }
+const persistConfig = { key: 'contacts', storage, blacklist: ['_persist'] }
 
 export const store = configureStore({
   reducer: persistReducer(persistConfig, rootReducer),

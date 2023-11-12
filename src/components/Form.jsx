@@ -31,8 +31,7 @@ export const Form = () => {
             placeholder='Enter name'
             {...registerName}
           />
-          {errorMessage('name', 'required')}
-          {errorMessage('name', 'minLength')}
+          {errorMessage('name')}
         </div>
         <div className='flex flex-col mb-4 justify-center w-48 mx-auto'>
           <InputMask
@@ -42,10 +41,8 @@ export const Form = () => {
             placeholder='Phone: xxx-xxx-xxxx'
             {...registerNumber}
           />
-          {errorMessage('number', 'required')}
-          {errorMessage('number', 'validate')}
+          {errorMessage('number')}
         </div>
-
         <button type='submit' className='mx-auto block rounded-md bg-orange-400 px-5 py-2'>
           Add contact
         </button>

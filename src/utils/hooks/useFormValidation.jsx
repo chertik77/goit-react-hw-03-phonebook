@@ -1,6 +1,7 @@
 import { useForm } from 'react-hook-form'
 
 const PHONE_NUMBER_LENGTH = 10
+const VALIDATION_TYPES = ['required', 'minLength', 'validate']
 
 export const useFormValidation = () => {
   const {
@@ -10,14 +11,16 @@ export const useFormValidation = () => {
     formState: { errors }
   } = useForm({ reValidateMode: 'onChange' })
 
-  const errorMessage = (field, type) =>
+  const errorMessage = field =>
     errors[field] &&
-    errors[field].type === type && <small className='p-error mt-2'>{errors[field].message}</small>
+    VALIDATION_TYPES.includes(errors[field].type) && (
+      <small className='p-error mt-2'>{errors[field].message}</small>
+    )
 
   const registerName = {
     ...register('name', {
       required: 'This field is required.',
-      minLength: { value: 5, message: 'This field should contain minimum 5 digits' }
+      minLength: { value: 5, message: 'This field should contain minimum 5 digits.' }
     })
   }
 
@@ -29,5 +32,5 @@ export const useFormValidation = () => {
     })
   }
 
-  return { handleSubmit, reset, registerName, registerNumber, errorMessage, errors }
+  return { handleSubmit, reset, registerName, registerNumber, errorMessage }
 }
