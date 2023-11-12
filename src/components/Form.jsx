@@ -12,11 +12,11 @@ export const Form = () => {
   const contacts = useSelector(selectContacts)
   const { handleSubmit, reset, registerName, registerNumber, errorMessage } = useFormValidation()
 
-  const submit = ({ name, number }) => {
-    if (isUserExistsByName(contacts, name) || isUserExistsByNumber(contacts, number)) {
-      showConfirmMessage().then(() => promiseToast(dispath(addNewUser({ name, number }))))
+  const submit = data => {
+    if (isUserExistsByName(contacts, data.name) || isUserExistsByNumber(contacts, data.number)) {
+      showConfirmMessage().then(() => promiseToast(dispath(addNewUser(data))))
     } else {
-      promiseToast(dispath(addNewUser({ name, number })))
+      promiseToast(dispath(addNewUser(data)))
     }
     reset()
   }
