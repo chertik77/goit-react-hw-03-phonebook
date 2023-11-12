@@ -32,8 +32,8 @@ export const Form = () => {
             placeholder='Enter name'
             {...registerName}
           />
-          {errorMessage('name', 'required', 'This field is required.')}
-          {errorMessage('name', 'minLength', 'This field should contain minimum 5 digits')}
+          {errorMessage('name', 'required')}
+          {errorMessage('name', 'minLength')}
         </div>
         <div className='flex flex-col mb-4 justify-center w-48 mx-auto'>
           <InputMask
@@ -44,8 +44,8 @@ export const Form = () => {
             placeholder='Phone: xxx-xxx-xxxx'
             {...registerNumber}
           />
-          {errorMessage('number', 'required', 'This field is required.')}
-          {errorMessage('number', 'validate', 'This field should contain 9 digits.')}
+          {errorMessage('number', 'required')}
+          {errorMessage('number', 'validate')}
         </div>
 
         <button type='submit' className='mx-auto block rounded-md bg-orange-400 px-5 py-2 font-serif'>
