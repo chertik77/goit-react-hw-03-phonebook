@@ -20,7 +20,7 @@ export const useFormValidation = () => {
   const registerName = {
     ...register('name', {
       required: 'This field is required.',
-      minLength: { value: 5, message: 'This field should contain minimum 5 digits.' }
+      minLength: { value: 5, message: 'This field should contain minimum 5 symbols.' }
     })
   }
 
