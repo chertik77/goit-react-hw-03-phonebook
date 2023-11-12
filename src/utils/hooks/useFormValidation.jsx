@@ -16,14 +16,14 @@ export const useFormValidation = () => {
 
   const registerName = {
     ...register('name', {
-      required: { value: true, message: 'This field is required.' },
+      required: 'This field is required.',
       minLength: { value: 5, message: 'This field should contain minimum 5 digits' }
     })
   }
 
   const registerNumber = {
     ...register('number', {
-      required: { value: true, message: 'This field is required.' },
+      required: 'This field is required.',
       validate: value =>
         value.replace(/[^0-9]/g, '').length === PHONE_NUMBER_LENGTH || 'This field should contain 9 digits.'
     })
