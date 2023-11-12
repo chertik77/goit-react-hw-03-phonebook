@@ -20,7 +20,7 @@ export const Contacts = () => {
 
   return (
     <>
-      <h2 className='text-center font-serif text-4xl mb-5'>Contacts:</h2>
+      <h2 className='text-center text-4xl mb-5'>Contacts:</h2>
       <ul className='gap-3 flex w-96 items-center justify-end flex-col'>
         {filterContacts.length ? (
           filterContacts.map(({ id, name, phone }) => (
@@ -29,7 +29,7 @@ export const Contacts = () => {
               <p>{phone}</p>
               <button
                 type='button'
-                className='rounded-md bg-red-600 px-5 py-2 font-serif'
+                className='rounded-md bg-red-600 px-5 py-2'
                 onClick={() => handleDelete(id)}>
                 Delete
               </button>

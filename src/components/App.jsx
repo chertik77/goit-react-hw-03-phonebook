@@ -3,7 +3,7 @@ import { Contacts, Filter, Form } from '~/components'
 
 export const App = () => (
   <>
-    <h1 className='mb-10 text-center font-serif text-4xl'>PhoneBook</h1>
+    <h1 className='mb-10 text-center text-4xl'>PhoneBook</h1>
     <Form />
     <Filter />
     <Contacts />

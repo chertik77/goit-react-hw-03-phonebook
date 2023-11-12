@@ -29,5 +29,5 @@ export const useFormValidation = () => {
     })
   }
 
-  return { handleSubmit, reset, registerName, registerNumber, errorMessage }
+  return { handleSubmit, reset, registerName, registerNumber, errorMessage, errors }
 }

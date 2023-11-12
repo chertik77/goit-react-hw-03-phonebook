@@ -27,8 +27,7 @@ export const Form = () => {
         <div className='flex flex-col mb-4 justify-center w-48 mx-auto'>
           <input
             type='text'
-            name='name'
-            className='block rounded p-2 font-serif placeholder:text-sm text-black border'
+            className='block rounded p-2 placeholder:text-sm text-black'
             placeholder='Enter name'
             {...registerName}
           />
@@ -37,9 +36,8 @@ export const Form = () => {
         </div>
         <div className='flex flex-col mb-4 justify-center w-48 mx-auto'>
           <InputMask
-            name='number'
             autoClear={false}
-            className='block rounded p-2 font-serif placeholder:text-sm text-black border'
+            className='block rounded p-2 placeholder:text-sm text-black'
             mask='999-999-9999'
             placeholder='Phone: xxx-xxx-xxxx'
             {...registerNumber}
@@ -48,7 +46,7 @@ export const Form = () => {
           {errorMessage('number', 'validate')}
         </div>
 
-        <button type='submit' className='mx-auto block rounded-md bg-orange-400 px-5 py-2 font-serif'>
+        <button type='submit' className='mx-auto block rounded-md bg-orange-400 px-5 py-2'>
           Add contact
         </button>
       </form>
