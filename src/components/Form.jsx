@@ -14,9 +14,17 @@ export const Form = () => {
 
   const submit = data => {
     if (isUserExistsByName(contacts, data.name) || isUserExistsByNumber(contacts, data.number)) {
-      showConfirmMessage().then(() => promiseToast(dispath(addNewUser(data))))
+      showConfirmMessage().then(() =>
+        promiseToast(dispath(addNewUser(data)), {
+          loading: 'Adding new user...',
+          success: data => `${data.payload.name} added successfully!`
+        })
+      )
     } else {
-      promiseToast(dispath(addNewUser(data)))
+      promiseToast(dispath(addNewUser(data)), {
+        loading: 'Adding new user...',
+        success: data => `${data.payload.name} added successfully!`
+      })
     }
     reset()
   }
