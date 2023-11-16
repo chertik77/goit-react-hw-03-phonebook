@@ -17,20 +17,16 @@ export const useFormValidation = () => {
       <small className='p-error mt-2'>{errors[field].message}</small>
     )
 
-  const registerName = {
-    ...register('name', {
-      required: 'This field is required.',
-      minLength: { value: 5, message: 'This field should contain minimum 5 symbols.' }
-    })
-  }
+  const registerName = register('name', {
+    required: 'This field is required.',
+    minLength: { value: 5, message: 'This field should contain minimum 5 symbols.' }
+  })
 
-  const registerNumber = {
-    ...register('number', {
-      required: 'This field is required.',
-      validate: value =>
-        value.replace(/[^0-9]/g, '').length === PHONE_NUMBER_LENGTH || 'This field should contain 9 digits.'
-    })
-  }
+  const registerNumber = register('number', {
+    required: 'This field is required.',
+    validate: value =>
+      value.replace(/[^0-9]/g, '').length === PHONE_NUMBER_LENGTH || 'This field should contain 9 digits.'
+  })
 
   return { handleSubmit, reset, registerName, registerNumber, errorMessage }
 }
