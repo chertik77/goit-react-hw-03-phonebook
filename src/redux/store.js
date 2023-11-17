@@ -1,14 +1,13 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { persistReducer, persistStore } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
-import { contactReducer } from './contactsSlice'
-import { filterReducer } from './filterSlice'
-
-const rootReducer = combineReducers({ contacts: contactReducer, filter: filterReducer })
-const persistConfig = { key: 'contacts', storage, blacklist: ['_persist'] }
+import { configureStore } from '@reduxjs/toolkit'
+import { persistStore } from 'redux-persist'
+import { contactsApi } from './services'
 
 export const store = configureStore({
-  reducer: persistReducer(persistConfig, rootReducer),
-  middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false })
+  reducer: { [contactsApi.reducerPath]: contactsApi.reducer },
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({ thunk: { extraArgument: contactsApi }, serializableCheck: false }).concat(
+      contactsApi.middleware
+    )
 })
+
 export const persistor = persistStore(store)
