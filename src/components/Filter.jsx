@@ -1,12 +1,11 @@
-import { ChangeEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeFilter } from 'redux/filterSlice'
 import { selectFilter } from 'redux/selectors'
 
 export const Filter = () => {
-  const filterValue: string = useSelector(selectFilter)
+  const filterValue = useSelector(selectFilter)
   const dispatch = useDispatch()
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => dispatch(changeFilter(e.target.value))
+  const handleChange = e => dispatch(changeFilter(e.target.value))
 
   return (
     <>

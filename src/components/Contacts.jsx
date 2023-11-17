@@ -8,7 +8,7 @@ export const Contacts = () => {
   const filterContacts = useSelector(filteredContacts)
   const dispatch = useDispatch()
 
-  const handleDelete = (id: string) =>
+  const handleDelete = id =>
     promiseToast(dispatch(deleteContactById(id)), {
       loading: 'Deleting...',
       success: 'User deleted successfully!'

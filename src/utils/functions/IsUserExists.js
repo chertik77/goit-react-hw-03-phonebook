@@ -1,4 +1,4 @@
-export const isUserExistsByName = (contacts: object[], name: string) => {
+export const isUserExistsByName = (contacts, name) => {
   return contacts.some(contact => {
     const contactNameToCheck = contact.name.toLowerCase()
     const inputNameToCheck = name.toLowerCase()

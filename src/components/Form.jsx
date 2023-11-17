@@ -1,5 +1,4 @@
 import { InputMask } from 'primereact/inputmask'
-import { type FieldValues } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNewUser } from 'redux/operations'
 import { selectContacts } from 'redux/selectors'
@@ -13,7 +12,7 @@ export const Form = () => {
   const contacts = useSelector(selectContacts)
   const { handleSubmit, reset, registerName, registerNumber, errorMessage } = useFormValidation()
 
-  const submit = (data: FieldValues) => {
+  const submit = data => {
     if (isUserExistsByName(contacts, data.name) || isUserExistsByNumber(contacts, data.number)) {
       showConfirmMessage().then(() =>
         promiseToast(dispath(addNewUser(data)), {

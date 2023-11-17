@@ -11,9 +11,9 @@ export const useFormValidation = () => {
     formState: { errors }
   } = useForm({ reValidateMode: 'onChange' })
 
-  const errorMessage = (field: string) =>
-    VALIDATION_TYPES.includes(errors[field]?.type) && (
-      <small className='p-error mt-2'>{errors[field].message}</small>
+  const errorMessage = field =>
+    VALIDATION_TYPES.includes(errors[field]?.type || '') && (
+      <small className='p-error mt-2'>{errors[field]?.message}</small>
     )
 
   const registerName = register('name', {
