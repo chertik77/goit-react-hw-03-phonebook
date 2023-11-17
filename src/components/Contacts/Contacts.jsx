@@ -37,14 +37,15 @@ export const Contacts = ({ isLoading, error, filteredContacts }) => {
             <div className='px-4 py-2 bg-gray-100 border-t border-gray-200'>
               <button
                 type='button'
-                className='inline-flex items-center justify-center px-4 py-2 text-sm 
-                font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700'
+                className='inline-flex items-center justify-center px-4 py-2 text-sm
+                 font-medium text-white bg-red-600 border 
+                 border-transparent rounded-md hover:bg-red-700'
                 onClick={() => handleDelete(id)}>
-                Delete
+                'Delete'
               </button>
             </div>
           </li>
-        ))}{' '}
+        ))}
       </ul>
     </>
   )

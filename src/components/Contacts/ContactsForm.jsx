@@ -50,7 +50,8 @@ export const Form = ({ data }) => {
         </div>
         <button
           type='submit'
-          className='mx-auto block rounded-md bg-orange-400 px-5 py-2 disabled:opacity-50 disabled:cursor-not-allowed'
+          className='mx-auto block rounded-md bg-orange-400 px-5 py-2 
+          disabled:opacity-50 disabled:cursor-not-allowed'
           disabled={isLoading}>
           {isLoading ? 'Adding...' : 'Add new contact'}
         </button>
