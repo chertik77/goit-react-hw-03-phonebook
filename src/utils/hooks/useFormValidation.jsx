@@ -12,7 +12,7 @@ export const useFormValidation = () => {
   } = useForm({ reValidateMode: 'onChange' })
 
   const errorMessage = field =>
-    VALIDATION_TYPES.includes(errors[field]?.type || '') && (
+    VALIDATION_TYPES.includes(errors[field]?.type) && (
       <small className='p-error mt-2'>{errors[field]?.message}</small>
     )
 
