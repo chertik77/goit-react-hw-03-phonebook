@@ -41,7 +41,7 @@ export const Contacts = ({ isLoading, error, filteredContacts }) => {
                  font-medium text-white bg-red-600 border 
                  border-transparent rounded-md hover:bg-red-700'
                 onClick={() => handleDelete(id)}>
-                'Delete'
+                Delete
               </button>
             </div>
           </li>
