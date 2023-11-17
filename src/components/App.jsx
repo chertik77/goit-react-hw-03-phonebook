@@ -12,10 +12,12 @@ export const App = () => {
   const { data, isLoading, error } = useGetContactsQuery()
 
   const handleFilterContacts = () =>
-    data?.filter(
-      ({ name, number }) =>
-        name.toLowerCase().includes(filter.toLowerCase()) || number.split('-').join('').includes(filter)
-    )
+    data
+      ?.filter(
+        ({ name, number }) =>
+          name.toLowerCase().includes(filter.toLowerCase()) || number.split('-').join('').includes(filter)
+      )
+      .reverse()
 
   return (
     <>
