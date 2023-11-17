@@ -23,17 +23,22 @@ export const Contacts = ({ isLoading, error, filteredContacts }) => {
         colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
       />
       {error && <p className='text-center text-3xl mb-5'>{error.data}</p>}
-      <ul className='gap-3 flex w-96 items-center justify-end flex-col'>
+      <ul className='grid grid-cols-3 gap-6 p-5 sm:grid-cols-1 md:grid-cols-3'>
         {filteredContacts()?.map(({ id, name, number }) => (
-          <li key={id} className='flex items-center justify-end gap-2'>
-            <p>{name}</p>
-            <p>{number}</p>
-            <button
-              type='button'
-              className='rounded-md bg-red-600 px-5 py-2 disabled:opacity-50 disabled:cursor-not-allowed'
-              onClick={() => handleDelete(id)}>
-              Delete
-            </button>
+          <li key={id} className='flex flex-col bg-white shadow-md rounded-lg overflow-hidden'>
+            <div className='p-4'>
+              <h2 className='text-lg font-semibold text-gray-900'>{name}</h2>
+              <p className='mt-2 text-sm text-gray-600'>{number}</p>
+            </div>
+            <div className='px-4 py-2 bg-gray-100 border-t border-gray-200'>
+              <button
+                type='button'
+                className='inline-flex items-center justify-center px-4 py-2 text-sm 
+                font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700'
+                onClick={() => handleDelete(id)}>
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
