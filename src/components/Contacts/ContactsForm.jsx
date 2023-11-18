@@ -1,12 +1,13 @@
 import { InputMask } from 'primereact/inputmask'
-import { useAddNewUserMutation } from 'redux/services'
+import { useAddNewContactMutation, useGetContactsQuery } from 'redux/services'
 import { isUserExistsByName, isUserExistsByNumber } from 'utils/functions/IsUserExists'
 import { useFormValidation } from 'utils/hooks/useFormValidation'
 import { showConfirmMessage } from 'utils/notifications/confirm'
 import { promiseToast } from 'utils/notifications/toast'
 
-export const Form = ({ data }) => {
-  const [addNewUser, { isLoading }] = useAddNewUserMutation()
+export const ContactsForm = () => {
+  const { data } = useGetContactsQuery()
+  const [addNewContact, { isLoading }] = useAddNewContactMutation()
   const { handleSubmit, reset, registerName, registerNumber, errorMessage } = useFormValidation()
 
   const submit = ({ name, number }) => {
@@ -20,7 +21,7 @@ export const Form = ({ data }) => {
         : ''
 
     const handleUserAddition = () =>
-      promiseToast(addNewUser({ name, number }), {
+      promiseToast(addNewContact({ name, number }), {
         loading: 'Adding new user...',
         success: ({ data }) => `${data.name} added successfully!`
       })

@@ -1,10 +1,21 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { persistStore } from 'redux-persist'
+import { persistReducer, persistStore } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { authReducer } from './authSlice'
 import { contactsApi } from './services'
 
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token']
+}
+
 export const store = configureStore({
-  reducer: { [contactsApi.reducerPath]: contactsApi.reducer },
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReducer),
+    [contactsApi.reducerPath]: contactsApi.reducer
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({ thunk: { extraArgument: contactsApi }, serializableCheck: false }).concat(
       contactsApi.middleware

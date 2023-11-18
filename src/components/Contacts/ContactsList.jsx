@@ -1,8 +1,7 @@
-import { ColorRing } from 'react-loader-spinner'
 import { useDeleteContactByIdMutation } from 'redux/services'
 import { promiseToast } from 'utils/notifications/toast'
 
-export const Contacts = ({ isLoading, error, filteredContacts }) => {
+export const ContactsList = ({ filteredContacts }) => {
   const [deleteContactById] = useDeleteContactByIdMutation()
 
   const handleDelete = id =>
@@ -13,20 +12,6 @@ export const Contacts = ({ isLoading, error, filteredContacts }) => {
 
   return (
     <>
-      <h2 className='text-center text-4xl mb-5'>Contacts:</h2>
-      <ColorRing
-        visible={isLoading}
-        height='100'
-        width='100'
-        ariaLabel='blocks-loading'
-        wrapperClass='blocks-wrapper mx-auto'
-        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-      />
-      {error && (
-        <p className='text-center text-2xl mb-5 p-10'>
-          We're sorry, but something went wrong. Please try again.
-        </p>
-      )}
       <ul className='grid grid-cols-3 gap-6 p-5 sm:grid-cols-1 md:grid-cols-3'>
         {filteredContacts()?.map(({ id, name, number }) => (
           <li key={id} className='flex flex-col bg-white shadow-md rounded-lg overflow-hidden'>
