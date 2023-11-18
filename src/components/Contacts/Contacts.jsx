@@ -24,7 +24,7 @@ export const Contacts = ({ isLoading, error, filteredContacts }) => {
       />
       {error && (
         <p className='text-center text-2xl mb-5 p-10'>
-          {"We're sorry, but something went wrong. Please try again."}
+          We're sorry, but something went wrong. Please try again.
         </p>
       )}
       <ul className='grid grid-cols-3 gap-6 p-5 sm:grid-cols-1 md:grid-cols-3'>

@@ -9,20 +9,28 @@ export const Form = ({ data }) => {
   const [addNewUser, { isLoading }] = useAddNewUserMutation()
   const { handleSubmit, reset, registerName, registerNumber, errorMessage } = useFormValidation()
 
-  const submit = values => {
-    if (isUserExistsByName(data, values.name) || isUserExistsByNumber(data, values.number)) {
-      showConfirmMessage().then(() =>
-        promiseToast(addNewUser(values), {
-          loading: 'Adding new user...',
-          success: ({ data }) => `${data.name} added successfully!`
-        })
-      )
-    } else {
-      promiseToast(addNewUser(values), {
+  const submit = ({ name, number }) => {
+    const userExistsMessage =
+      isUserExistsByName(data, name) && isUserExistsByNumber(data, number)
+        ? `A user with the name ${name} and number ${number} already exists. Do you still want to add ${name}?`
+        : isUserExistsByName(data, name)
+        ? `A user with the name ${name} already exists. Do you still want to add ${name}?`
+        : isUserExistsByNumber(data, number)
+        ? `A user with the number ${number} already exists. Do you still want to add ${name}?`
+        : ''
+
+    const handleUserAddition = () =>
+      promiseToast(addNewUser({ name, number }), {
         loading: 'Adding new user...',
         success: ({ data }) => `${data.name} added successfully!`
       })
+
+    if (userExistsMessage) {
+      showConfirmMessage(userExistsMessage).then(handleUserAddition)
+    } else {
+      handleUserAddition()
     }
+
     reset()
   }
 
