@@ -3,7 +3,7 @@ import { Button, FormControl, FormLabel, Input, Stack } from '@mui/joy'
 import { useForm } from 'react-hook-form'
 import { useLoginMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
-import { RequestError } from 'utils/ui/error'
+import { RequestError } from 'utils/ui/Error'
 
 export const LoginForm = () => {
   const [login, { isLoading, error }] = useLoginMutation()
