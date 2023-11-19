@@ -11,23 +11,10 @@ import Stack from '@mui/joy/Stack'
 import Typography from '@mui/joy/Typography'
 import { CssVarsProvider } from '@mui/joy/styles'
 import { LoginForm } from 'components/pages/login/LoginForm'
-import { useLoginFormValidation } from 'hooks/useLoginFormValidation'
-import { useEffect, useState } from 'react'
 import { ColorSchemeToggle } from 'utils/ui/ColorShemeToggle'
 import GoogleIcon from 'utils/ui/GoogleIcon'
 
 export default function JoySignInSideTemplate() {
-  const { reset } = useLoginFormValidation()
-  const [isSignUp, setIsSignUp] = useState(false)
-
-  const handleToggle = () => {
-    setIsSignUp(!isSignUp)
-  }
-
-  useEffect(() => {
-    reset()
-  }, [reset])
-
   return (
     <CssVarsProvider defaultMode='dark' disableTransitionOnChange>
       <CssBaseline />
@@ -110,12 +97,9 @@ export default function JoySignInSideTemplate() {
             }}>
             <Stack gap={4} sx={{ mb: 2 }}>
               <Stack gap={1}>
-                <Typography level='h3'>{isSignUp ? 'Sign up' : 'Sign in'}</Typography>
+                <Typography level='h3'>Sign in</Typography>
                 <Typography level='body-sm'>
-                  {isSignUp ? 'Have an account?' : 'New to PhoneBook?'}{' '}
-                  <Link level='title-sm' onClick={handleToggle}>
-                    {isSignUp ? 'Sign in!' : 'Sign up!'}
-                  </Link>
+                  New to PhoneBook? <Link level='title-sm'>'Sign up!</Link>
                 </Typography>
               </Stack>
 
@@ -136,7 +120,7 @@ export default function JoySignInSideTemplate() {
               or
             </Divider>
             <Stack gap={4} sx={{ mt: 2 }}>
-              <LoginForm isSignUp={isSignUp} />
+              <LoginForm />
             </Stack>
           </Box>
           <Box component='footer' sx={{ py: 3 }}>
