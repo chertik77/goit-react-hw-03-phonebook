@@ -1,5 +1,5 @@
-import { useFormValidation } from 'hooks/useContactsFormValidation'
 import { InputMask } from 'primereact/inputmask'
+import { useForm } from 'react-hook-form'
 import { useAddNewContactMutation, useGetContactsQuery } from 'redux/services'
 import { isUserExistsByName, isUserExistsByNumber } from 'utils/helpers/IsUserExists'
 import { showConfirmMessage } from 'utils/notifications/Confirm'
@@ -8,7 +8,15 @@ import { promiseToast } from 'utils/notifications/Toast'
 export const ContactsForm = () => {
   const { data } = useGetContactsQuery()
   const [addNewContact, { isLoading }] = useAddNewContactMutation()
-  const { handleSubmit, reset, registerName, registerNumber, errorMessage } = useFormValidation()
+  const {
+    handleSubmit,
+    reset,
+    register,
+    formState: { errors }
+  } = useForm()
+
+  const errorMessage = field =>
+    errors[field] && <small className='p-error mt-2'>{errors[field]?.message}</small>
 
   const submit = ({ name, number }) => {
     const userExistsMessage =
@@ -43,7 +51,7 @@ export const ContactsForm = () => {
             type='text'
             className='block rounded p-2 placeholder:text-sm text-black'
             placeholder='Enter name'
-            {...registerName}
+            {...register('name')}
           />
           {errorMessage('name')}
         </div>
@@ -53,7 +61,7 @@ export const ContactsForm = () => {
             className='block rounded p-2 placeholder:text-sm text-black'
             mask='999-999-9999'
             placeholder='Phone: xxx-xxx-xxxx'
-            {...registerNumber}
+            {...register('number')}
           />
           {errorMessage('number')}
         </div>
