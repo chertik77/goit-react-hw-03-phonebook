@@ -1,5 +1,5 @@
 import { useDeleteContactByIdMutation } from 'redux/services'
-import { promiseToast } from 'utils/notifications/toast'
+import { promiseToast } from 'utils/notifications/Toast'
 
 export const ContactsList = ({ filteredContacts }) => {
   const [deleteContactById] = useDeleteContactByIdMutation()
@@ -11,27 +11,26 @@ export const ContactsList = ({ filteredContacts }) => {
     })
 
   return (
-    <>
-      <ul className='grid grid-cols-3 gap-6 p-5 sm:grid-cols-1 md:grid-cols-3'>
-        {filteredContacts()?.map(({ id, name, number }) => (
-          <li key={id} className='flex flex-col bg-white shadow-md rounded-lg overflow-hidden'>
-            <div className='p-4'>
-              <h2 className='text-lg font-semibold text-gray-900'>{name}</h2>
-              <p className='mt-2 text-sm text-gray-600'>{number}</p>
-            </div>
-            <div className='px-4 py-2 bg-gray-100 border-t border-gray-200'>
-              <button
-                type='button'
-                className='inline-flex items-center justify-center px-4 py-2 text-sm
-                 font-medium text-white bg-red-600 border 
-                 border-transparent rounded-md hover:bg-red-700'
-                onClick={() => handleDelete(id)}>
-                Delete
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </>
+    <div className='mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'>
+      {filteredContacts()?.map(({ id, name, number }) => (
+        <div
+          key={id}
+          className='relative p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out'>
+          <h2 className='text-lg font-semibold text-gray-900'>{name}</h2>
+          <p className='mt-2 text-sm text-gray-500'>{number}</p>
+          <button
+            onClick={() => handleDelete(id)}
+            className='absolute top-2 right-2 text-gray-400 hover:text-red-500'>
+            <svg className='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth='2'
+                d='M6 18L18 6M6 6l12 12'></path>
+            </svg>
+          </button>
+        </div>
+      ))}
+    </div>
   )
 }

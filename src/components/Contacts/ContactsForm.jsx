@@ -1,9 +1,9 @@
+import { useFormValidation } from 'hooks/useContactsFormValidation'
 import { InputMask } from 'primereact/inputmask'
 import { useAddNewContactMutation, useGetContactsQuery } from 'redux/services'
-import { isUserExistsByName, isUserExistsByNumber } from 'utils/functions/IsUserExists'
-import { useFormValidation } from 'utils/hooks/useFormValidation'
-import { showConfirmMessage } from 'utils/notifications/confirm'
-import { promiseToast } from 'utils/notifications/toast'
+import { isUserExistsByName, isUserExistsByNumber } from 'utils/helpers/IsUserExists'
+import { showConfirmMessage } from 'utils/notifications/Confirm'
+import { promiseToast } from 'utils/notifications/Toast'
 
 export const ContactsForm = () => {
   const { data } = useGetContactsQuery()

@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux'
+import { useAuth } from 'hooks/useAuth'
 import { NavLink } from 'react-router-dom'
 import { UserMenu } from './UserMenu'
 
 export const AppBar = () => {
-  const { isLoggedIn } = useSelector(state => state.auth)
+  const { isLoggedIn } = useAuth()
 
   return (
     <header>

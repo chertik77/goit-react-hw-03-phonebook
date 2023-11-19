@@ -1,19 +1,14 @@
 import { ContactsFilter } from 'components/Contacts/ContactsFilter'
 import { ContactsForm } from 'components/Contacts/ContactsForm'
 import { ContactsList } from 'components/Contacts/ContactsList'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useGetContactsQuery } from 'redux/services'
-import { successRegistrationToast } from 'utils/notifications/toast'
-import { Error } from 'utils/ui/error'
-import { Spinner } from 'utils/ui/spinner'
+import { Error } from 'utils/ui/Error'
+import { Spinner } from 'utils/ui/Loader'
 
 const Contacts = () => {
   const [filter, setFilter] = useState('')
   const { data, isLoading, error } = useGetContactsQuery()
-
-  useEffect(() => {
-    successRegistrationToast()
-  }, [])
 
   const filteredContacts = () =>
     data

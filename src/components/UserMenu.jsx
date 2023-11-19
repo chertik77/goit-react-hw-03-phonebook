@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux'
+import { useAuth } from 'hooks/useAuth'
 import { useLogoutMutation } from 'redux/services'
 
 export const UserMenu = () => {
   const [logout] = useLogoutMutation()
-  const { user } = useSelector(state => state.auth)
+  const { user } = useAuth()
 
   return (
     <div

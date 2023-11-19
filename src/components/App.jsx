@@ -1,10 +1,10 @@
+import { useAuth } from 'hooks/useAuth'
 import { lazy } from 'react'
-import { useSelector } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 import { useCurrentUserQuery } from 'redux/services'
+import { PrivateRoute } from 'routes/PrivateRoute'
+import { RestrictedRoute } from 'routes/RestrictedRoute'
 import { Layout } from './Layout'
-import { PrivateRoute } from './PrivateRoute'
-import { RestrictedRoute } from './RestrictedRoute'
 
 const HomePage = lazy(() => import('pages/Home'))
 const RegisterPage = lazy(() => import('pages/Register'))
@@ -13,7 +13,7 @@ const ContactsPage = lazy(() => import('pages/Contacts'))
 
 export const App = () => {
   useCurrentUserQuery()
-  const { isRefreshing } = useSelector(state => state.auth)
+  const { isRefreshing } = useAuth()
 
   return isRefreshing ? (
     <b>Refreshing user...</b>
