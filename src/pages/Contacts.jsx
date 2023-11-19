@@ -3,7 +3,7 @@ import { ContactsForm } from 'components/Contacts/ContactsForm'
 import { ContactsList } from 'components/Contacts/ContactsList'
 import { useState } from 'react'
 import { useGetContactsQuery } from 'redux/services'
-import { Error } from 'utils/ui/Error'
+import { Error } from 'utils/ui/error'
 import { Spinner } from 'utils/ui/Loader'
 
 const Contacts = () => {
