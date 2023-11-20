@@ -1,5 +1,5 @@
 import { Box, CssBaseline, CssVarsProvider, GlobalStyles } from '@mui/joy'
-import { Footer, Header, Image, Main } from 'components/pages/login/blocks'
+import { Footer, Header, Image, Main } from 'components/pages'
 
 const Login = () => (
   <CssVarsProvider defaultMode='system' disableTransitionOnChange>

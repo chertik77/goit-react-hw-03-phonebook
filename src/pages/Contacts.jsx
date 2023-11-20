@@ -1,6 +1,4 @@
-import { ContactsFilter } from 'components/Contacts/ContactsFilter'
-import { ContactsForm } from 'components/Contacts/ContactsForm'
-import { ContactsList } from 'components/Contacts/ContactsList'
+import { ContactsFilter, ContactsForm, ContactsList } from 'components/pages'
 import { useState } from 'react'
 import { useGetContactsQuery } from 'redux/services'
 import { Error } from 'utils/ui/ErrorMessage'

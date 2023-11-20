@@ -13,18 +13,18 @@ export const contactsApi = createApi({
     }
   }),
   tagTypes: ['Contacts'],
-  endpoints: builder => ({
-    signup: builder.mutation({ query: data => ({ url: 'users/signup', method: 'POST', body: data }) }),
-    login: builder.mutation({ query: data => ({ url: 'users/login', method: 'POST', body: data }) }),
-    currentUser: builder.query({ query: () => 'users/current' }),
-    logout: builder.mutation({ query: () => ({ url: 'users/logout', method: 'POST' }) }),
+  endpoints: ({ query, mutation }) => ({
+    signup: mutation({ query: data => ({ url: 'users/signup', method: 'POST', body: data }) }),
+    login: mutation({ query: data => ({ url: 'users/login', method: 'POST', body: data }) }),
+    currentUser: query({ query: () => 'users/current' }),
+    logout: mutation({ query: () => ({ url: 'users/logout', method: 'POST' }) }),
 
-    getContacts: builder.query({ query: () => 'contacts', providesTags: ['Contacts'] }),
-    deleteContactById: builder.mutation({
+    getContacts: query({ query: () => 'contacts', providesTags: ['Contacts'] }),
+    deleteContactById: mutation({
       query: id => ({ url: `contacts/${id}`, method: 'DELETE' }),
       invalidatesTags: ['Contacts']
     }),
-    addNewContact: builder.mutation({
+    addNewContact: mutation({
       query: data => ({ url: 'contacts', method: 'POST', body: data }),
       invalidatesTags: ['Contacts']
     })
