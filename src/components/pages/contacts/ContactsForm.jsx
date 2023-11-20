@@ -2,10 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { InputMask } from 'primereact/inputmask'
 import { useForm } from 'react-hook-form'
 import { useAddNewContactMutation } from 'redux/services'
-import { handleUserAddition, userExistsMessage } from 'utils/helpers/user'
+import { userExistsMessage } from 'utils/helpers/userExistsMessage'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
 import { showConfirmMessage } from 'utils/notifications/confirm'
-import { ErrorInputMessage } from 'utils/ui/ErrorMessage'
+import { promiseToast } from 'utils/notifications/toast'
 
 export const ContactsForm = ({ entitites }) => {
   const [addNewContact, { isLoading }] = useAddNewContactMutation()
@@ -15,6 +15,15 @@ export const ContactsForm = ({ entitites }) => {
     register,
     formState: { errors }
   } = useForm({ resolver: yupResolver(createValidationSchema(['name', 'number'])) })
+
+  const handleUserAddition = (dispatcher, data) =>
+    promiseToast(dispatcher(data), {
+      loading: 'Adding new user...',
+      success: ({ data }) => `${data.name} added successfully!`
+    })
+
+  const ErrorInputMessage = ({ errors, field }) =>
+    errors[field] && <small className='p-error mt-1'>{errors[field]?.message}</small>
 
   const submit = data => {
     if (userExistsMessage(entitites, data)) {

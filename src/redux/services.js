@@ -6,28 +6,14 @@ export const contactsApi = createApi({
     baseUrl: 'https://connections-api.herokuapp.com/',
     prepareHeaders: (headers, { getState }) => {
       const token = getState().auth.token
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`)
-      }
+      if (token) headers.set('authorization', `Bearer ${token}`)
       return headers
     }
   }),
   tagTypes: ['Contacts'],
   endpoints: ({ query, mutation }) => ({
-    signup: mutation({
-      query: ({ name, email, signuppassword }) => ({
-        url: 'users/signup',
-        method: 'POST',
-        body: { name, email, password: signuppassword }
-      })
-    }),
-    login: mutation({
-      query: ({ email, loginpassword }) => ({
-        url: 'users/login',
-        method: 'POST',
-        body: { email, password: loginpassword }
-      })
-    }),
+    signup: mutation({ query: data => ({ url: 'users/signup', method: 'POST', body: data }) }),
+    login: mutation({ query: data => ({ url: 'users/login', method: 'POST', body: data }) }),
     currentUser: query({ query: () => 'users/current' }),
     logout: mutation({ query: () => ({ url: 'users/logout', method: 'POST' }) }),
 

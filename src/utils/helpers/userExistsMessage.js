@@ -1,4 +1,4 @@
-import { isUserExistsByName, isUserExistsByNumber } from 'utils/helpers/user'
+import { isUserExistsByName, isUserExistsByNumber } from './isUserExists'
 
 export const userExistsMessage = (entitites, { name, number }) =>
   isUserExistsByName(entitites, name) && isUserExistsByNumber(entitites, number)

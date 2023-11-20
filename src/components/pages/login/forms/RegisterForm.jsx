@@ -21,14 +21,15 @@ export const RegisterForm = () => {
 
   return (
     <Form
+      autoComplete='on'
       control={control}
-      onSubmit={async ({ data }) => {
-        await signup(data)
+      onSubmit={async ({ data: { name, email, signuppassword: password } }) => {
+        await signup({ name, email, password })
         reset()
       }}>
       <FormControl error={Boolean(errors?.name)}>
         <FormLabel>Name</FormLabel>
-        <Input type='text' {...register('name')} />
+        <Input type='text' {...register('name')} autoComplete='given-name' />
         {errors?.name && (
           <FormHelperText>
             <InfoOutlined />
@@ -38,7 +39,7 @@ export const RegisterForm = () => {
       </FormControl>
       <FormControl error={Boolean(errors?.email)}>
         <FormLabel>Email</FormLabel>
-        <Input type='email' {...register('email')} />
+        <Input type='email' {...register('email')} autoComplete='email' />
         {errors?.email && (
           <FormHelperText>
             <InfoOutlined />

@@ -1,7 +1,6 @@
 import { Input, LinearProgress, Stack, Typography } from '@mui/joy'
 import { forwardRef, useEffect, useState } from 'react'
 import { calculatePasswordStrength } from './calculatePasswordStrength'
-
 export const PasswordMeterInput = forwardRef(({ onChange, value, ...props }, ref) => {
   const [localValue, setLocalValue] = useState(value || '')
 
@@ -19,7 +18,14 @@ export const PasswordMeterInput = forwardRef(({ onChange, value, ...props }, ref
 
   return (
     <Stack spacing={0.5} sx={{ '--hue': Math.min(localValue.length * 10, 120) }}>
-      <Input type='text' value={localValue} onChange={handleChange} ref={ref} {...props} />
+      <Input
+        type='password'
+        value={localValue}
+        onChange={handleChange}
+        ref={ref}
+        {...props}
+        autoComplete='new-password'
+      />
       <LinearProgress
         determinate
         size='sm'

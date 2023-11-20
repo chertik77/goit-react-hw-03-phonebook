@@ -6,6 +6,7 @@ import { authReducer } from './authSlice'
 import { contactsApi } from './services'
 
 const authPersistConfig = { key: 'auth', storage, whitelist: ['token'] }
+
 export const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
@@ -16,5 +17,6 @@ export const store = configureStore({
       contactsApi.middleware
     )
 })
+
 setupListeners(store.dispatch)
 export const persistor = persistStore(store)
