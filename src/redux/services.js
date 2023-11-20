@@ -14,8 +14,20 @@ export const contactsApi = createApi({
   }),
   tagTypes: ['Contacts'],
   endpoints: ({ query, mutation }) => ({
-    signup: mutation({ query: data => ({ url: 'users/signup', method: 'POST', body: data }) }),
-    login: mutation({ query: data => ({ url: 'users/login', method: 'POST', body: data }) }),
+    signup: mutation({
+      query: ({ name, email, signuppassword }) => ({
+        url: 'users/signup',
+        method: 'POST',
+        body: { name, email, password: signuppassword }
+      })
+    }),
+    login: mutation({
+      query: ({ email, loginpassword }) => ({
+        url: 'users/login',
+        method: 'POST',
+        body: { email, password: loginpassword }
+      })
+    }),
     currentUser: query({ query: () => 'users/current' }),
     logout: mutation({ query: () => ({ url: 'users/logout', method: 'POST' }) }),
 
