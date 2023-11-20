@@ -12,9 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <PrimeReactProvider>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter
-          // eslint-disable-next-line no-undef
-          basename='/goit-react-hw-08-phonebook'>
+        <BrowserRouter basename='/goit-react-hw-08-phonebook'>
           <App />
         </BrowserRouter>
       </PersistGate>

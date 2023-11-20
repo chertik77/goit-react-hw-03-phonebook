@@ -11,9 +11,15 @@ export const AppBar = () => {
         <UserMenu />
       ) : (
         <div>
-          <NavLink to='/'>Home</NavLink>
-          <NavLink to='/register'>Register</NavLink>
-          <NavLink to='/login'>Log In</NavLink>
+          <NavLink className='text-black' to='/' style={{ color: 'black' }}>
+            Home
+          </NavLink>
+          <NavLink className='text-black' to='/register' style={{ color: 'black' }}>
+            Register
+          </NavLink>
+          <NavLink className='text-black' to='/login' style={{ color: 'black' }}>
+            Log In
+          </NavLink>
         </div>
       )}
     </header>
