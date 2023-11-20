@@ -1,7 +1,9 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { InputMask } from 'primereact/inputmask'
 import { useForm } from 'react-hook-form'
 import { useAddNewContactMutation, useGetContactsQuery } from 'redux/services'
 import { isUserExistsByName, isUserExistsByNumber } from 'utils/helpers/IsUserExists'
+import { createValidationSchema } from 'utils/helpers/validationSchema'
 import { showConfirmMessage } from 'utils/notifications/confirm'
 import { promiseToast } from 'utils/notifications/toast'
 
@@ -13,7 +15,7 @@ export const ContactsForm = () => {
     reset,
     register,
     formState: { errors }
-  } = useForm()
+  } = useForm({ resolver: yupResolver(createValidationSchema(['name', 'number'])) })
 
   const errorMessage = field =>
     errors[field] && <small className='p-error mt-2'>{errors[field]?.message}</small>

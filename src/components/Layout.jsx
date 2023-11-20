@@ -7,7 +7,7 @@ import { AppBar } from './AppBar'
 
 export const Layout = () => {
   return (
-    <div>
+    <>
       <AppBar />
       <Suspense fallback={null}>
         <Outlet />
@@ -17,6 +17,6 @@ export const Layout = () => {
         className='w-2rem h-2rem border-round-md bg-white text-black'
         icon='pi pi-chevron-up text-black'
       />
-    </div>
+    </>
   )
 }

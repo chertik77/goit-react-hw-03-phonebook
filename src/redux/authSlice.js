@@ -17,7 +17,7 @@ const authSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addMatcher(contactsApi.endpoints.createNewUser.matchFulfilled, handleUserFullfilled)
+      .addMatcher(contactsApi.endpoints.signup.matchFulfilled, handleUserFullfilled)
       .addMatcher(contactsApi.endpoints.login.matchFulfilled, handleUserFullfilled)
       .addMatcher(contactsApi.endpoints.currentUser.matchPending, state => {
         state.isRefreshing = true

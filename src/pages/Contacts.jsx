@@ -3,8 +3,8 @@ import { ContactsForm } from 'components/Contacts/ContactsForm'
 import { ContactsList } from 'components/Contacts/ContactsList'
 import { useState } from 'react'
 import { useGetContactsQuery } from 'redux/services'
-import { Error } from 'utils/ui/error'
-import { Spinner } from 'utils/ui/Loader'
+import { Error } from 'utils/ui/Error'
+import { Loader } from 'utils/ui/Loader'
 
 const Contacts = () => {
   const [filter, setFilter] = useState('')
@@ -26,7 +26,7 @@ const Contacts = () => {
       <h2 className='text-center text-3xl mb-5'>
         {!data?.length ? 'Add someone to start' : 'Your Contacts'}
       </h2>
-      <Spinner isLoading={isLoading} />
+      <Loader isLoading={isLoading} />
       <Error error={error} />
       <ContactsList filteredContacts={filteredContacts} />
     </>
