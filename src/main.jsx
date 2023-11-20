@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <PrimeReactProvider>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename='/goit-react-hw-08-phonebook'>
+        <BrowserRouter basename={import.meta.env.MODE === 'production' ? '/goit-react-hw-08-phonebook' : ''}>
           <App />
         </BrowserRouter>
       </PersistGate>
