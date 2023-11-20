@@ -1,49 +1,46 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, FormControl, FormLabel, Input, Stack } from '@mui/joy'
-import { useForm } from 'react-hook-form'
+import { Form, useForm } from 'react-hook-form'
 import { useSignupMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
-
+import { ErrorInputMessage, RequestError } from 'utils/ui/ErrorMessage'
 export const RegisterForm = () => {
   const [signup, { isLoading, error }] = useSignupMutation()
   const {
     reset,
-    handleSubmit,
+    control,
     register,
     formState: { errors }
   } = useForm({ resolver: yupResolver(createValidationSchema(['name', 'email', 'password'])) })
 
-  const errorMessage = field =>
-    errors[field] && <small className='p-error mt-2'>{errors[field]?.message}</small>
-
-  const onSubmit = data => {
-    signup(data)
-    reset()
-  }
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <Form
+      control={control}
+      onSubmit={({ data }) => {
+        signup(data)
+        reset()
+      }}>
       <FormControl>
         <FormLabel>Name</FormLabel>
-        <Input type='email' name='email' {...register('name')} sx={{ mb: 1 }} />
-        {errorMessage('name')}
+        <Input type='text' name='name' {...register('name')} />
+        <ErrorInputMessage errors={errors} field='name' />
       </FormControl>
       <FormControl>
         <FormLabel>Email</FormLabel>
-        <Input type='email' name='email' {...register('email')} sx={{ mb: 1 }} />
-        {errorMessage('email')}
+        <Input type='email' name='email' {...register('email')} />
+        <ErrorInputMessage errors={errors} field='email' />
       </FormControl>
       <FormControl>
         <FormLabel>Password</FormLabel>
-        <Input type='password' name='password' {...register('password')} sx={{ mb: 1 }} />
-        {errorMessage('password')}
+        <Input type='password' name='password' {...register('password')} />
+        <ErrorInputMessage errors={errors} field='password' />
       </FormControl>
-      <Stack sx={{ mt: 0.5, gap: 2 }}>
-        {error && <small className='p-error'>A user with the same email already exists.</small>}
+      <Stack sx={{ mt: 2, gap: 2 }}>
+        <RequestError error={error} type='signup' />
         <Button type='submit' fullWidth loading={isLoading}>
           Sign up
         </Button>
       </Stack>
-    </form>
+    </Form>
   )
 }

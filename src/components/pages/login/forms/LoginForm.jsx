@@ -1,45 +1,42 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, FormControl, FormLabel, Input, Stack } from '@mui/joy'
-import { useForm } from 'react-hook-form'
+import { Form, useForm } from 'react-hook-form'
 import { useLoginMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
-import { RequestError } from 'utils/ui/Error'
+import { ErrorInputMessage, RequestError } from 'utils/ui/ErrorMessage'
 
 export const LoginForm = () => {
   const [login, { isLoading, error }] = useLoginMutation()
   const {
     reset,
-    handleSubmit,
+    control,
     register,
     formState: { errors }
   } = useForm({ resolver: yupResolver(createValidationSchema(['email', 'password'])) })
 
-  const errorMessage = field =>
-    errors[field] && <small className='p-error mt-2'>{errors[field]?.message}</small>
-
   return (
-    <form
-      onSubmit={handleSubmit(data => {
+    <Form
+      control={control}
+      onSubmit={({ data }) => {
         login(data)
         reset()
-      })}
-      noValidate>
+      }}>
       <FormControl>
         <FormLabel>Email</FormLabel>
-        <Input type='email' name='email' {...register('email')} sx={{ mb: 1 }} />
-        {errorMessage('email')}
+        <Input type='email' name='email' {...register('email')} />
+        <ErrorInputMessage errors={errors} field='email' />
       </FormControl>
       <FormControl>
         <FormLabel>Password</FormLabel>
-        <Input type='password' name='password' {...register('password')} sx={{ mb: 1 }} />
-        {errorMessage('password')}
+        <Input type='password' name='password' {...register('password')} />
+        <ErrorInputMessage errors={errors} field='password' />
       </FormControl>
-      <Stack sx={{ mt: 0.5, gap: 2 }}>
-        <RequestError error={error} />
+      <Stack sx={{ mt: 2, gap: 2 }}>
+        <RequestError error={error} type='login' />
         <Button type='submit' fullWidth loading={isLoading}>
           Sign in
         </Button>
       </Stack>
-    </form>
+    </Form>
   )
 }
