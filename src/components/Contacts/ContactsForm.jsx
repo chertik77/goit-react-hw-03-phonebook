@@ -2,8 +2,8 @@ import { InputMask } from 'primereact/inputmask'
 import { useForm } from 'react-hook-form'
 import { useAddNewContactMutation, useGetContactsQuery } from 'redux/services'
 import { isUserExistsByName, isUserExistsByNumber } from 'utils/helpers/IsUserExists'
-import { showConfirmMessage } from 'utils/notifications/Confirm'
-import { promiseToast } from 'utils/notifications/Toast'
+import { showConfirmMessage } from 'utils/notifications/confirm'
+import { promiseToast } from 'utils/notifications/toast'
 
 export const ContactsForm = () => {
   const { data } = useGetContactsQuery()

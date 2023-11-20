@@ -1,5 +1,5 @@
 import { useDeleteContactByIdMutation } from 'redux/services'
-import { promiseToast } from 'utils/notifications/Toast'
+import { promiseToast } from 'utils/notifications/toast'
 
 export const ContactsList = ({ filteredContacts }) => {
   const [deleteContactById] = useDeleteContactByIdMutation()
