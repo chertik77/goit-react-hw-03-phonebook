@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter
           // eslint-disable-next-line no-undef
-          basename='/goit-react-hw-08-phonebook/login'>
+          basename='/goit-react-hw-08-phonebook'>
           <App />
         </BrowserRouter>
       </PersistGate>
