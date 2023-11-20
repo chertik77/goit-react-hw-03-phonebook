@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <PrimeReactProvider>
       <PersistGate loading={null} persistor={persistor}>
-        <HashRouter basename={import.meta.env.MODE === 'production' ? '/goit-react-hw-08-phonebook' : ''}>
+        <HashRouter>
           <App />
         </HashRouter>
       </PersistGate>
