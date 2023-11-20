@@ -1,7 +1,6 @@
-import { ContactsFilter, ContactsForm, ContactsList } from 'components/pages'
+import { ContactsFilter, ContactsForm, ContactsList, UserMenu } from 'components/pages'
 import { useState } from 'react'
 import { useGetContactsQuery } from 'redux/services'
-import { Error } from 'utils/ui/ErrorMessage'
 import { Loader } from 'utils/ui/Loader'
 
 const Contacts = () => {
@@ -18,14 +17,19 @@ const Contacts = () => {
 
   return (
     <>
+      <UserMenu />
       <h1 className='mb-10 text-center text-4xl mt-40'>PhoneBook</h1>
-      <ContactsForm />
+      <ContactsForm entitites={data} />
       <ContactsFilter onChange={setFilter} items={data} />
       <h2 className='text-center text-3xl mb-5'>
         {!data?.length ? 'Add someone to start' : 'Your Contacts'}
       </h2>
       <Loader isLoading={isLoading} />
-      <Error error={error} />
+      {error && (
+        <p className='text-center text-2xl mb-5 p-10'>
+          We're sorry, but something went wrong. Please try again.
+        </p>
+      )}
       <ContactsList filteredContacts={filteredContacts} />
     </>
   )

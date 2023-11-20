@@ -1,6 +1,7 @@
 export * from './contacts/ContactsFilter'
 export * from './contacts/ContactsForm'
 export * from './contacts/ContactsList'
+export * from './contacts/UserMenu'
 export * from './login/blocks/Footer'
 export * from './login/blocks/Header'
 export * from './login/blocks/Image'

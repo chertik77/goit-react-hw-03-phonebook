@@ -1,14 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { InputMask } from 'primereact/inputmask'
 import { useForm } from 'react-hook-form'
-import { useAddNewContactMutation, useGetContactsQuery } from 'redux/services'
-import { isUserExistsByName, isUserExistsByNumber } from 'utils/helpers/isUserExists'
+import { useAddNewContactMutation } from 'redux/services'
+import { handleUserAddition, userExistsMessage } from 'utils/helpers/user'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
 import { showConfirmMessage } from 'utils/notifications/confirm'
-import { promiseToast } from 'utils/notifications/toast'
+import { ErrorInputMessage } from 'utils/ui/ErrorMessage'
 
-export const ContactsForm = () => {
-  const { data } = useGetContactsQuery()
+export const ContactsForm = ({ entitites }) => {
   const [addNewContact, { isLoading }] = useAddNewContactMutation()
   const {
     handleSubmit,
@@ -17,29 +16,13 @@ export const ContactsForm = () => {
     formState: { errors }
   } = useForm({ resolver: yupResolver(createValidationSchema(['name', 'number'])) })
 
-  const errorMessage = field =>
-    errors[field] && <small className='p-error mt-2'>{errors[field]?.message}</small>
-
-  const submit = ({ name, number }) => {
-    const userExistsMessage =
-      isUserExistsByName(data, name) && isUserExistsByNumber(data, number)
-        ? `A user with the name ${name} and number ${number} already exists. Do you still want to add ${name}?`
-        : isUserExistsByName(data, name)
-        ? `A user with the name ${name} already exists. Do you still want to add ${name}?`
-        : isUserExistsByNumber(data, number)
-        ? `A user with the number ${number} already exists. Do you still want to add ${name}?`
-        : ''
-
-    const handleUserAddition = () =>
-      promiseToast(addNewContact({ name, number }), {
-        loading: 'Adding new user...',
-        success: ({ data }) => `${data.name} added successfully!`
-      })
-
-    if (userExistsMessage) {
-      showConfirmMessage(userExistsMessage).then(handleUserAddition)
+  const submit = data => {
+    if (userExistsMessage(entitites, data)) {
+      showConfirmMessage(userExistsMessage(entitites, data)).then(() =>
+        handleUserAddition(addNewContact, data)
+      )
     } else {
-      handleUserAddition()
+      handleUserAddition(addNewContact, data)
     }
 
     reset()
@@ -55,7 +38,7 @@ export const ContactsForm = () => {
             placeholder='Enter name'
             {...register('name')}
           />
-          {errorMessage('name')}
+          <ErrorInputMessage errors={errors} field='name' />
         </div>
         <div className='flex flex-col mb-4 justify-center w-48 mx-auto'>
           <InputMask
@@ -65,7 +48,7 @@ export const ContactsForm = () => {
             placeholder='Phone: xxx-xxx-xxxx'
             {...register('number')}
           />
-          {errorMessage('number')}
+          <ErrorInputMessage errors={errors} field='number' />
         </div>
         <button
           type='submit'

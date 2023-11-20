@@ -3,11 +3,9 @@ import { ScrollTop } from 'primereact/scrolltop'
 import { Suspense } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { Outlet } from 'react-router-dom'
-import { AppBar } from './AppBar'
 
 export const Layout = () => (
   <>
-    <AppBar />
     <Suspense fallback={null}>
       <Outlet />
     </Suspense>

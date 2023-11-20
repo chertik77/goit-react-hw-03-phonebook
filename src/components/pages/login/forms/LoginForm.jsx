@@ -1,9 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, FormControl, FormLabel, Input, Stack } from '@mui/joy'
+import { InfoOutlined } from '@mui/icons-material'
+import { Button, FormControl, FormHelperText, FormLabel, Input, Stack } from '@mui/joy'
 import { Form, useForm } from 'react-hook-form'
 import { useLoginMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
-import { ErrorInputMessage, RequestError } from 'utils/ui/ErrorMessage'
+import { RequestError } from 'utils/ui/ErrorMessage'
 
 export const LoginForm = () => {
   const [login, { isLoading, error }] = useLoginMutation()
@@ -11,29 +12,45 @@ export const LoginForm = () => {
     reset,
     control,
     register,
-    formState: { errors }
-  } = useForm({ resolver: yupResolver(createValidationSchema(['email', 'password'])) })
+    formState: { errors, isValid }
+  } = useForm({ mode: 'onChange', resolver: yupResolver(createValidationSchema(['email', 'loginpassword'])) })
 
   return (
     <Form
       control={control}
+      autoComplete='on'
       onSubmit={({ data }) => {
         login(data)
         reset()
       }}>
-      <FormControl>
+      <FormControl error={Boolean(errors?.email)}>
         <FormLabel>Email</FormLabel>
-        <Input type='email' name='email' {...register('email')} />
-        <ErrorInputMessage errors={errors} field='email' />
+        <Input type='email' name='email' {...register('email')} autoComplete='email' />
+        {errors?.email && (
+          <FormHelperText>
+            <InfoOutlined />
+            {errors.email.message}
+          </FormHelperText>
+        )}
       </FormControl>
-      <FormControl>
+      <FormControl error={Boolean(errors?.loginpassword)}>
         <FormLabel>Password</FormLabel>
-        <Input type='password' name='password' {...register('password')} />
-        <ErrorInputMessage errors={errors} field='password' />
+        <Input
+          type='password'
+          name='password'
+          {...register('loginpassword')}
+          autoComplete='current-password'
+        />
+        {errors?.loginpassword && (
+          <FormHelperText>
+            <InfoOutlined />
+            {errors.loginpassword.message}
+          </FormHelperText>
+        )}
       </FormControl>
       <Stack sx={{ mt: 2, gap: 2 }}>
         <RequestError error={error} type='login' />
-        <Button type='submit' fullWidth loading={isLoading}>
+        <Button type='submit' fullWidth loading={isLoading} disabled={!isValid}>
           Sign in
         </Button>
       </Stack>

@@ -1,17 +1,23 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, FormControl, FormLabel, Input, Stack } from '@mui/joy'
-import { Form, useForm } from 'react-hook-form'
+import { InfoOutlined } from '@mui/icons-material'
+import { Button, FormControl, FormHelperText, FormLabel, Input, Stack } from '@mui/joy'
+import { Controller, Form, useForm } from 'react-hook-form'
 import { useSignupMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
-import { ErrorInputMessage, RequestError } from 'utils/ui/ErrorMessage'
+import { PasswordMeterInput } from 'utils/password/PasswordMeterInput'
+import { RequestError } from 'utils/ui/ErrorMessage'
+
 export const RegisterForm = () => {
   const [signup, { isLoading, error }] = useSignupMutation()
   const {
     reset,
     control,
     register,
-    formState: { errors }
-  } = useForm({ resolver: yupResolver(createValidationSchema(['name', 'email', 'password'])) })
+    formState: { errors, isValid }
+  } = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(createValidationSchema(['name', 'email', 'signuppassword']))
+  })
 
   return (
     <Form
@@ -20,24 +26,43 @@ export const RegisterForm = () => {
         signup(data)
         reset()
       }}>
-      <FormControl>
+      <FormControl error={Boolean(errors?.name)}>
         <FormLabel>Name</FormLabel>
-        <Input type='text' name='name' {...register('name')} />
-        <ErrorInputMessage errors={errors} field='name' />
+        <Input type='text' {...register('name')} />
+        {errors?.name && (
+          <FormHelperText>
+            <InfoOutlined />
+            {errors.name.message}
+          </FormHelperText>
+        )}
       </FormControl>
-      <FormControl>
+      <FormControl error={Boolean(errors?.email)}>
         <FormLabel>Email</FormLabel>
-        <Input type='email' name='email' {...register('email')} />
-        <ErrorInputMessage errors={errors} field='email' />
+        <Input type='email' {...register('email')} />
+        {errors?.email && (
+          <FormHelperText>
+            <InfoOutlined />
+            {errors.email.message}
+          </FormHelperText>
+        )}
       </FormControl>
-      <FormControl>
+      <FormControl error={Boolean(errors?.signuppassword)}>
         <FormLabel>Password</FormLabel>
-        <Input type='password' name='password' {...register('password')} />
-        <ErrorInputMessage errors={errors} field='password' />
+        <Controller
+          name='signuppassword'
+          control={control}
+          render={({ field }) => <PasswordMeterInput {...field} />}
+        />
+        {errors?.signuppassword && (
+          <FormHelperText>
+            <InfoOutlined />
+            {errors.signuppassword.message}
+          </FormHelperText>
+        )}
       </FormControl>
       <Stack sx={{ mt: 2, gap: 2 }}>
         <RequestError error={error} type='signup' />
-        <Button type='submit' fullWidth loading={isLoading}>
+        <Button type='submit' fullWidth loading={isLoading} disabled={!isValid}>
           Sign up
         </Button>
       </Stack>

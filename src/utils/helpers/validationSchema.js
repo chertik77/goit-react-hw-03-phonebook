@@ -1,5 +1,5 @@
+import { calculatePasswordStrength } from 'utils/password/calculatePasswordStrength'
 import { object, string } from 'yup'
-
 const PHONE_NUMBER_LENGTH = 10
 
 const validationSchemas = {
@@ -15,7 +15,15 @@ const validationSchemas = {
       val => val.replace(/[^0-9]/g, '').length === PHONE_NUMBER_LENGTH
     ),
   email: string().email('Please enter a valid email address.').required('This field is required.').trim(),
-  password: string()
+  signuppassword: string()
+    .required('This field is required.')
+    .test(
+      'passwordStrength',
+      'Please make a stronger password',
+      value => calculatePasswordStrength(value) >= 75
+    )
+    .trim(),
+  loginpassword: string()
     .required('This field is required.')
     .min(8, 'This field should contain at least 8 characters.')
     .trim()

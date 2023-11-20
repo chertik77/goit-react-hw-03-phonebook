@@ -1,34 +1,82 @@
-import { useDeleteContactByIdMutation } from 'redux/services'
+import { useRef, useState } from 'react'
+import ContentEditable from 'react-contenteditable'
+import { useDeleteContactByIdMutation, useEditContactByIdMutation } from 'redux/services'
 import { promiseToast } from 'utils/notifications/toast'
 
 export const ContactsList = ({ filteredContacts }) => {
+  const [isEditable, setIsEditable] = useState(false)
+  const editValues = useRef({ name: '', number: '' })
   const [deleteContactById] = useDeleteContactByIdMutation()
+  const [edit] = useEditContactByIdMutation()
 
-  const handleDelete = id =>
+  const handleNameChange = e => {
+    editValues.current.name = e.target.value
+  }
+
+  const handleNumberChange = e => {
+    editValues.current.number = e.target.value
+  }
+
+  const handleDelete = id => {
     promiseToast(deleteContactById(id), {
       loading: 'Deleting...',
-      success: 'User deleted successfully!'
+      success: 'Contact deleted successfully!'
     })
+  }
+
+  const handleEdit = id => {
+    console.log(editValues)
+    promiseToast(edit({ id, values: editValues.current }), {
+      loading: 'Updating your contact...',
+      success: 'Contact edited successfully!'
+    })
+  }
 
   return (
-    <div className='mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3'>
+    <div className='flex flex-wrap justify-around'>
       {filteredContacts()?.map(({ id, name, number }) => (
-        <div
-          key={id}
-          className='relative p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out'>
-          <h2 className='text-lg font-semibold text-gray-900'>{name}</h2>
-          <p className='mt-2 text-sm text-gray-500'>{number}</p>
-          <button
-            onClick={() => handleDelete(id)}
-            className='absolute top-2 right-2 text-gray-400 hover:text-red-500'>
-            <svg className='h-5 w-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M6 18L18 6M6 6l12 12'></path>
-            </svg>
-          </button>
+        <div key={id} className='m-4 w-64 rounded overflow-hidden shadow-lg bg-white'>
+          <div className='px-6 py-4'>
+            <ContentEditable
+              className='font-bold text-xl mb-2'
+              tagName='p'
+              html={name}
+              disabled={!isEditable}
+              onLoadStart={e => console.log(e)}
+              onChange={handleNameChange}
+            />
+            <ContentEditable
+              className='text-gray-700 text-base'
+              tagName='p'
+              html={number}
+              disabled={!isEditable}
+              onFocus={e => (editValues.current.number = e.target.textContent)}
+              onChange={handleNumberChange}
+            />
+          </div>
+          <div className='px-6 pt-4 pb-2'>
+            {isEditable ? (
+              <button
+                onClick={() => {
+                  handleEdit(id)
+                  setIsEditable(false)
+                }}
+                className='inline-block bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2'>
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => setIsEditable(!isEditable)}
+                className='inline-block bg-blue-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2'>
+                Edit
+              </button>
+            )}
+            <button
+              onClick={() => handleDelete(id)}
+              className='inline-block bg-red-500 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2'>
+              Delete
+            </button>
+          </div>
         </div>
       ))}
     </div>
