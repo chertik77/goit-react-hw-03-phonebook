@@ -22,8 +22,8 @@ export const RegisterForm = () => {
   return (
     <Form
       control={control}
-      onSubmit={({ data }) => {
-        signup(data)
+      onSubmit={async ({ data }) => {
+        await signup(data)
         reset()
       }}>
       <FormControl error={Boolean(errors?.name)}>

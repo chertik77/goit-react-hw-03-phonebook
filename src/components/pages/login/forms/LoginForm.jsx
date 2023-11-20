@@ -19,8 +19,8 @@ export const LoginForm = () => {
     <Form
       control={control}
       autoComplete='on'
-      onSubmit={({ data }) => {
-        login(data)
+      onSubmit={async ({ data }) => {
+        await login(data)
         reset()
       }}>
       <FormControl error={Boolean(errors?.email)}>
