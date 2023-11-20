@@ -24,7 +24,7 @@ export const PasswordMeterInput = forwardRef(({ onChange, value, ...props }, ref
         onChange={handleChange}
         ref={ref}
         {...props}
-        autoComplete='new-password'
+        autoComplete='current-password'
       />
       <LinearProgress
         determinate
