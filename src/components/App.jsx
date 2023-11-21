@@ -14,11 +14,12 @@ const ContactsPage = lazy(() => import('pages/Contacts'))
 
 export const App = () => {
   const dispatch = useDispatch()
-  const { isRefreshing } = useAuth()
+  const { isRefreshing, token } = useAuth()
 
   useEffect(() => {
+    if (token === null) return
     dispatch(contactsApi.endpoints.currentUser.initiate())
-  }, [dispatch])
+  }, [dispatch, token])
 
   return isRefreshing ? (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
