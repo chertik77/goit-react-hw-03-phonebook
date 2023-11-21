@@ -1,7 +1,8 @@
 import { useAuth } from 'hooks/useAuth'
-import { lazy } from 'react'
+import { lazy, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
-import { useCurrentUserQuery } from 'redux/services'
+import { contactsApi } from 'redux/services'
 import { PrivateRoute } from 'routes/PrivateRoute'
 import { RestrictedRoute } from 'routes/RestrictedRoute'
 import { Loader } from 'utils/ui/Loader'
@@ -12,8 +13,12 @@ const LoginPage = lazy(() => import('pages/Login'))
 const ContactsPage = lazy(() => import('pages/Contacts'))
 
 export const App = () => {
+  const dispatch = useDispatch()
   const { isRefreshing } = useAuth()
-  useCurrentUserQuery()
+
+  useEffect(() => {
+    dispatch(contactsApi.endpoints.currentUser.initiate())
+  }, [dispatch])
 
   return isRefreshing ? (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
