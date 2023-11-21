@@ -26,7 +26,7 @@ export const App = () => {
       .reverse()
 
   return isRefreshing ? (
-    <div className='flex items-center justify-center h-screen'>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
       <Loader />
     </div>
   ) : (

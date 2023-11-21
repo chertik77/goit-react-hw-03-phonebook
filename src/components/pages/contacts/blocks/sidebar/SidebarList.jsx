@@ -1,5 +1,6 @@
-import { Box, List, ListItem, listItemButtonClasses } from '@mui/joy'
-import { Link } from 'react-router-dom'
+import { Box, Link, List, ListItem, listItemButtonClasses } from '@mui/joy'
+import { Link as RouterLink } from 'react-router-dom'
+import { toggleSidebar } from 'utils/helpers/toggleSidebar'
 
 export const SidebarList = () => (
   <Box
@@ -19,10 +20,26 @@ export const SidebarList = () => (
         '--ListItem-radius': theme => theme.vars.radius.sm
       }}>
       <ListItem sx={{ mt: 0.5 }}>
-        <Link to='/contacts'>All contacts</Link>
+        <Link
+          component={RouterLink}
+          to='/contacts'
+          onClick={() => toggleSidebar()}
+          color='neutral'
+          underline='none'
+          level='body-sm'>
+          All contacts
+        </Link>
       </ListItem>
       <ListItem>
-        <Link to='create'>Create a new contact</Link>
+        <Link
+          component={RouterLink}
+          to='create'
+          onClick={() => toggleSidebar()}
+          color='neutral'
+          underline='none'
+          level='body-sm'>
+          Create a new contact
+        </Link>
       </ListItem>
     </List>
   </Box>

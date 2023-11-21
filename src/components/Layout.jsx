@@ -10,9 +10,6 @@ export const Layout = () => (
       <Outlet />
     </Suspense>
     <Toaster />
-    <ScrollTop
-      className='w-2rem h-2rem border-round-md bg-white text-black'
-      icon='pi pi-chevron-up text-black'
-    />
+    <ScrollTop style={{ color: 'black', backgroundColor: 'white' }} icon='pi pi-chevron-up text-black' />
   </>
 )
