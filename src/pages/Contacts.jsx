@@ -1,9 +1,21 @@
 import { Box, CssBaseline, CssVarsProvider, Typography } from '@mui/joy'
 import { Header, Main, MainMobile, Sidebar } from 'components/pages/contacts'
+import { useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
+import { useGetContactsQuery } from 'redux/services'
 
-const Contacts = ({ entitites, setFilter }) => {
+const Contacts = () => {
+  const [filter, setFilter] = useState('')
+  const { data } = useGetContactsQuery()
   const { pathname } = useLocation()
+
+  const filteredContacts = () =>
+    data
+      ?.filter(
+        ({ name, number }) =>
+          name.toLowerCase().includes(filter.toLowerCase()) || number.split('-').join('').includes(filter)
+      )
+      .reverse()
 
   return (
     <CssVarsProvider disableTransitionOnChange>
@@ -39,11 +51,11 @@ const Contacts = ({ entitites, setFilter }) => {
           </Box>
           {pathname === '/contacts' ? (
             <>
-              <Main items={entitites} filter={setFilter} />
-              <MainMobile items={entitites} />
+              <Main items={filteredContacts} filter={setFilter} />
+              <MainMobile items={filteredContacts} />
             </>
           ) : (
-            <Outlet />
+            <Outlet context={[filteredContacts]} />
           )}
         </Box>
       </Box>

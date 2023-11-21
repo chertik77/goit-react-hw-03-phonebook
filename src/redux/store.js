@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage'
 import { authReducer } from './authSlice'
 import { contactsApi } from './services'
 
-const authPersistConfig = { key: 'auth', storage, whitelist: ['token'] }
+const authPersistConfig = { key: 'auth', storage, whitelist: ['token'], blacklist: ['_persist'] }
 
 export const store = configureStore({
   reducer: {

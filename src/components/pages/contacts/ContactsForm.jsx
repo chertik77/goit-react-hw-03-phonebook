@@ -1,13 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { InputMask } from 'primereact/inputmask'
 import { useForm } from 'react-hook-form'
+import { useOutletContext } from 'react-router-dom'
 import { useAddNewContactMutation } from 'redux/services'
 import { userExistsMessage } from 'utils/helpers/userExistsMessage'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
 import { showConfirmMessage } from 'utils/notifications/confirm'
 import { promiseToast } from 'utils/notifications/toast'
 
-export const ContactsForm = ({ entitites }) => {
+export const ContactsForm = () => {
+  const [entitites] = useOutletContext()
   const [addNewContact, { isLoading }] = useAddNewContactMutation()
   const {
     handleSubmit,
