@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom'
 import { useCurrentUserQuery, useGetContactsQuery } from 'redux/services'
 import { PrivateRoute } from 'routes/PrivateRoute'
 import { RestrictedRoute } from 'routes/RestrictedRoute'
+import { Loader } from 'utils/ui/Loader'
 import { Layout } from './Layout'
 import { ContactsForm } from './pages/contacts/ContactsForm'
 
@@ -24,23 +25,23 @@ export const App = () => {
       )
       .reverse()
 
-  return (
-    !isRefreshing && (
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<RestrictedRoute redirectTo='/contacts' component={<LoginPage />} />} />
-          <Route
-            path='/contacts'
-            element={
-              <PrivateRoute
-                redirectTo='/'
-                component={<ContactsPage entitites={filteredContacts} setFilter={setFilter} />}
-              />
-            }>
-            <Route path='create' element={<ContactsForm entitites={filteredContacts} />} />
-          </Route>
+  return isRefreshing ? (
+    <Loader />
+  ) : (
+    <Routes>
+      <Route path='/' element={<Layout />}>
+        <Route index element={<RestrictedRoute redirectTo='/contacts' component={<LoginPage />} />} />
+        <Route
+          path='/contacts'
+          element={
+            <PrivateRoute
+              redirectTo='/'
+              component={<ContactsPage entitites={filteredContacts} setFilter={setFilter} />}
+            />
+          }>
+          <Route path='create' element={<ContactsForm entitites={filteredContacts} />} />
         </Route>
-      </Routes>
-    )
+      </Route>
+    </Routes>
   )
 }
