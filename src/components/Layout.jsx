@@ -3,16 +3,10 @@ import { ScrollTop } from 'primereact/scrolltop'
 import { Suspense } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { Outlet } from 'react-router-dom'
-import { Loader } from 'utils/ui/Loader'
 
 export const Layout = () => (
   <>
-    <Suspense
-      fallback={
-        <div className='grid items-center justify-center h-screen'>
-          <Loader />
-        </div>
-      }>
+    <Suspense fallback={null}>
       <Outlet />
     </Suspense>
     <Toaster />

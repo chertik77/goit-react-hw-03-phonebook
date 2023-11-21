@@ -26,7 +26,9 @@ export const App = () => {
       .reverse()
 
   return isRefreshing ? (
-    <Loader />
+    <div className='flex items-center justify-center h-screen'>
+      <Loader />
+    </div>
   ) : (
     <Routes>
       <Route path='/' element={<Layout />}>
