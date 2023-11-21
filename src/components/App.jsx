@@ -11,8 +11,8 @@ const LoginPage = lazy(() => import('pages/Login'))
 const ContactsPage = lazy(() => import('pages/Contacts'))
 
 export const App = () => {
-  useCurrentUserQuery()
-  const { isRefreshing } = useAuth()
+  const { isRefreshing, token } = useAuth()
+  useCurrentUserQuery('_', { skip: token === null })
 
   return isRefreshing ? (
     <div className='flex items-center justify-center h-screen'>

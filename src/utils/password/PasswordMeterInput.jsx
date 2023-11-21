@@ -34,7 +34,6 @@ export const PasswordMeterInput = forwardRef(({ onChange, value, ...props }, ref
         sx={{ bgcolor: 'background.level3', color: 'hsl(var(--hue) 80% 40%)' }}
       />
       <Typography level='body-xs' sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}>
-        {strength === 0 && 'Empty or too weak'}
         {strength === 25 && 'Very weak - add numbers, caps, or symbols'}
         {strength === 50 && 'Weak - try adding uppercase letters or special characters'}
         {strength === 75 && 'Strong - try adding special characters for extra security'}
