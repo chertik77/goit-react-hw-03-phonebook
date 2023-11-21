@@ -1,6 +1,7 @@
 import { Input, LinearProgress, Stack, Typography } from '@mui/joy'
 import { forwardRef, useEffect, useState } from 'react'
 import { calculatePasswordStrength } from './calculatePasswordStrength'
+
 export const PasswordMeterInput = forwardRef(({ onChange, value, ...props }, ref) => {
   const [localValue, setLocalValue] = useState(value || '')
 
