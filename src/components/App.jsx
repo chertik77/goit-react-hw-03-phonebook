@@ -8,7 +8,6 @@ import { RestrictedRoute } from 'routes/RestrictedRoute'
 import { Loader } from 'utils/ui/Loader'
 import { Layout } from './Layout'
 import { ContactsForm } from './pages/contacts/ContactsForm'
-
 const LoginPage = lazy(() => import('pages/Login'))
 const ContactsPage = lazy(() => import('pages/Contacts'))
 
