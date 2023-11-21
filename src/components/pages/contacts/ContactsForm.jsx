@@ -26,8 +26,8 @@ export const ContactsForm = ({ entitites }) => {
     errors[field] && <small className='p-error mt-1'>{errors[field]?.message}</small>
 
   const submit = data => {
-    if (userExistsMessage(entitites, data)) {
-      showConfirmMessage(userExistsMessage(entitites, data)).then(() =>
+    if (userExistsMessage(entitites(), data)) {
+      showConfirmMessage(userExistsMessage(entitites(), data)).then(() =>
         handleUserAddition(addNewContact, data)
       )
     } else {
