@@ -5,7 +5,7 @@ import { ContactsTable } from './Table'
 
 export const Main = ({ items, filter }) => (
   <>
-    <Filter onChange={filter} items={items} />
+    <Filter onChange={filter} />
     {items()?.length > 0 ? (
       <>
         <Sheet

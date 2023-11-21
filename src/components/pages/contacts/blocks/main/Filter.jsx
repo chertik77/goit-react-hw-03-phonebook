@@ -1,7 +1,7 @@
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, FormControl, FormLabel, Input } from '@mui/joy'
 
-export const Filter = ({ items, onChange }) => (
+export const Filter = ({ onChange }) => (
   <Box
     sx={{
       borderRadius: 'sm',
@@ -16,7 +16,6 @@ export const Filter = ({ items, onChange }) => (
       <Input
         size='sm'
         placeholder='Search'
-        disabled={!items()?.length}
         startDecorator={<SearchIcon />}
         onChange={e => onChange(e.target.value)}
       />
