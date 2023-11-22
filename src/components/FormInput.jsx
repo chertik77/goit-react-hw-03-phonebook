@@ -23,7 +23,7 @@ export const FormInputController = ({ name, label, error, helperText, control, c
       name={name}
       defaultValue=''
       control={control}
-      render={({ field }) => cloneElement(children, { ...field })}
+      render={({ field }) => cloneElement(children, field)}
     />
     {error && (
       <FormHelperText>
