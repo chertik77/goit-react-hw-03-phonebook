@@ -19,8 +19,7 @@ export const ContactsForm = ({ contacts }) => {
     control,
     formState: { errors, isValid }
   } = useForm({
-    reValidateMode: 'onChange',
-    defaultValues: { name: '', number: '' },
+    mode: 'onChange',
     resolver: yupResolver(createValidationSchema(['name', 'number']))
   })
 
@@ -43,7 +42,7 @@ export const ContactsForm = ({ contacts }) => {
   }
 
   return (
-    <form autoComplete='on' onSubmit={handleSubmit(submit)}>
+    <form autoComplete='on' onSubmit={handleSubmit(submit)} style={{ marginTop: 10 }}>
       <FormInput
         error={errors?.name}
         label='Name'
@@ -54,10 +53,11 @@ export const ContactsForm = ({ contacts }) => {
         helperText={errors?.name?.message}
       />
       <FormControl error={Boolean(errors?.number)}>
-        <FormLabel>Number</FormLabel>
+        <FormLabel sx={{ mt: 2 }}>Number</FormLabel>
         <Controller
           name='number'
           control={control}
+          defaultValue=''
           render={({ field }) => (
             <InputMask mask='999-999-9999' autoComplete='tel' {...field}>
               <Input sx={{ width: 284 }} />

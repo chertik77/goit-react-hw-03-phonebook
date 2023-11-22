@@ -8,7 +8,7 @@ export const Main = ({ contacts, filter, setFilter }) => (
     {contacts()?.length > 0 ? (
       <Sheet
         variant='outlined'
-        sx={{ display: { xs: 'none', lg: 'initial' }, borderRadius: 'sm', width: 800, mt: 4 }}>
+        sx={{ display: { xs: 'none', lg: 'initial' }, borderRadius: 'sm', width: 800, mt: 4, mb: 5 }}>
         <ContactsTable contacts={contacts} />
       </Sheet>
     ) : filter === '' ? (
