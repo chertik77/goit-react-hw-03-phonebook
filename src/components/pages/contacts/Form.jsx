@@ -1,8 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { InfoOutlined } from '@mui/icons-material'
-import { Button, FormControl, FormHelperText, FormLabel, Input, Stack } from '@mui/joy'
-import { FormInput } from 'components/FormInput'
-import { Controller, useForm } from 'react-hook-form'
+import { Button, Input, Stack } from '@mui/joy'
+import { FormInput, FormInputController } from 'components/FormInput'
+import { useForm } from 'react-hook-form'
 import InputMask from 'react-input-mask'
 import { useAddNewContactMutation } from 'redux/services'
 import { userExistsMessage } from 'utils/helpers/userExistsMessage'
@@ -10,7 +9,7 @@ import { createValidationSchema } from 'utils/helpers/validationSchema'
 import { showConfirmMessage } from 'utils/notifications/confirm'
 import { promiseToast } from 'utils/notifications/toast'
 
-export const ContactsForm = ({ contacts }) => {
+export const Form = ({ contacts }) => {
   const [addNewContact, { isLoading }] = useAddNewContactMutation()
   const {
     handleSubmit,
@@ -42,7 +41,10 @@ export const ContactsForm = ({ contacts }) => {
   }
 
   return (
-    <form autoComplete='on' onSubmit={handleSubmit(submit)} style={{ marginTop: 10 }}>
+    <form
+      autoComplete='on'
+      onSubmit={handleSubmit(submit)}
+      style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 20 }}>
       <FormInput
         error={errors?.name}
         label='Name'
@@ -52,25 +54,16 @@ export const ContactsForm = ({ contacts }) => {
         sx={{ width: 284 }}
         helperText={errors?.name?.message}
       />
-      <FormControl error={Boolean(errors?.number)}>
-        <FormLabel sx={{ mt: 2 }}>Number</FormLabel>
-        <Controller
-          name='number'
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <InputMask mask='999-999-9999' autoComplete='tel' {...field}>
-              <Input sx={{ width: 284 }} />
-            </InputMask>
-          )}
-        />
-        {errors?.number && (
-          <FormHelperText>
-            <InfoOutlined />
-            {errors.number.message}
-          </FormHelperText>
-        )}
-      </FormControl>
+      <FormInputController
+        name='number'
+        control={control}
+        label='Number'
+        error={errors?.number}
+        helperText={errors?.number?.message}>
+        <InputMask mask='999-999-9999' autoComplete='tel'>
+          <Input sx={{ width: 284 }} />
+        </InputMask>
+      </FormInputController>
       <Stack sx={{ mt: 2, gap: 2 }}>
         <Button type='submit' loading={isLoading} disabled={!isValid} sx={{ width: 284 }}>
           Add contact

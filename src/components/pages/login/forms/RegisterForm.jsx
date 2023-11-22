@@ -1,8 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { InfoOutlined } from '@mui/icons-material'
-import { Button, FormControl, FormHelperText, FormLabel, Stack } from '@mui/joy'
-import { FormInput } from 'components/FormInput'
-import { Controller, useForm } from 'react-hook-form'
+import { Button, Stack } from '@mui/joy'
+import { FormInput, FormInputController } from 'components/FormInput'
+import { useForm } from 'react-hook-form'
 import { useSignupMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
 import { PasswordMeterInput } from 'utils/password/PasswordMeterInput'
@@ -44,20 +43,14 @@ export const RegisterForm = () => {
         type='email'
         helperText={errors?.email?.message}
       />
-      <FormControl error={Boolean(errors?.signuppassword)}>
-        <FormLabel>Password</FormLabel>
-        <Controller
-          name='signuppassword'
-          control={control}
-          render={({ field }) => <PasswordMeterInput {...field} />}
-        />
-        {errors?.signuppassword && (
-          <FormHelperText>
-            <InfoOutlined />
-            {errors.signuppassword.message}
-          </FormHelperText>
-        )}
-      </FormControl>
+      <FormInputController
+        error={errors?.signuppassword}
+        label='Password'
+        name='signuppassword'
+        helperText={errors?.signuppassword?.message}
+        control={control}>
+        <PasswordMeterInput />
+      </FormInputController>
       <Stack sx={{ mt: 2, gap: 2 }}>
         <RequestError error={error} type='signup' />
         <Button type='submit' fullWidth loading={isLoading} disabled={!isValid}>

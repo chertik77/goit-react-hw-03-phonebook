@@ -1,6 +1,6 @@
 import { Box, CssBaseline, CssVarsProvider, Typography } from '@mui/joy'
-import { ContactsForm } from 'ContactsForm'
 import { Header, Main, MainMobile, Sidebar } from 'components/pages/contacts'
+import { Form } from 'components/pages/contacts/Form'
 import { useState } from 'react'
 import { useGetContactsQuery } from 'redux/services'
 
@@ -17,7 +17,7 @@ export default function Contacts() {
       .reverse()
 
   return (
-    <CssVarsProvider>
+    <CssVarsProvider defaultMode='system'>
       <CssBaseline />
       <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
         <Header />
@@ -34,7 +34,7 @@ export default function Contacts() {
           <Typography level='h2' sx={{ my: 1 }}>
             Contacts
           </Typography>
-          <ContactsForm contacts={filteredContacts} />
+          <Form contacts={filteredContacts} />
           <Main contacts={filteredContacts} filter={filter} setFilter={setFilter} />
           <MainMobile contacts={filteredContacts} />
         </Box>
