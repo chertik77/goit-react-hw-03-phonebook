@@ -1,4 +1,4 @@
-import { SearchIcon } from '@mui/icons-material'
+import { Search } from '@mui/icons-material'
 import { Box, FormControl, FormLabel, Input } from '@mui/joy'
 
 export const Filter = ({ onChange, filter }) => (
@@ -8,7 +8,7 @@ export const Filter = ({ onChange, filter }) => (
       <Input
         placeholder='Search'
         value={filter}
-        startDecorator={<SearchIcon />}
+        startDecorator={<Search />}
         onChange={e => onChange(e.target.value.trim())}
       />
     </FormControl>
