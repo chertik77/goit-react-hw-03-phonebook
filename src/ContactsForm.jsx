@@ -1,7 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Button, Stack } from '@mui/joy'
-import { FormInput, FormInputController } from 'components/FormInput'
-import { useForm } from 'react-hook-form'
+import { InfoOutlined } from '@mui/icons-material'
+import { Button, FormControl, FormHelperText, FormLabel, Input, Stack } from '@mui/joy'
+import { FormInput } from 'components/FormInput'
+import { Controller, useForm } from 'react-hook-form'
+import InputMask from 'react-input-mask'
 import { useAddNewContactMutation } from 'redux/services'
 import { userExistsMessage } from 'utils/helpers/userExistsMessage'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
@@ -51,11 +53,24 @@ export const ContactsForm = ({ contacts }) => {
         sx={{ width: 284 }}
         helperText={errors?.name?.message}
       />
-      <FormInputController
-        error={errors?.number}
-        label='Number'
-        control={control}
-        helperText={errors?.number?.message}></FormInputController>
+      <FormControl error={Boolean(errors?.number)}>
+        <FormLabel>Number</FormLabel>
+        <Controller
+          name='number'
+          control={control}
+          render={({ field }) => (
+            <InputMask mask='999-999-9999' autoComplete='tel' {...field}>
+              <Input sx={{ width: 284 }} />
+            </InputMask>
+          )}
+        />
+        {errors?.number && (
+          <FormHelperText>
+            <InfoOutlined />
+            {errors.number.message}
+          </FormHelperText>
+        )}
+      </FormControl>
       <Stack sx={{ mt: 2, gap: 2 }}>
         <Button type='submit' loading={isLoading} disabled={!isValid} sx={{ width: 284 }}>
           Add contact
