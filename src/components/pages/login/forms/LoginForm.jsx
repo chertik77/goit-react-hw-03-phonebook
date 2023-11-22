@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Stack } from '@mui/joy'
-import { FormInput } from 'components/pages/FormInput'
+import { FormInput } from 'components/FormInput'
 import { useForm } from 'react-hook-form'
 import { useLoginMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
