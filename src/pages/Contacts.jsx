@@ -36,8 +36,8 @@ export default function Contacts() {
           </Typography>
           <ContactsForm contacts={filteredContacts} />
           <Main contacts={filteredContacts} filter={filter} setFilter={setFilter} />
+          <MainMobile contacts={filteredContacts} />
         </Box>
-        <MainMobile contacts={filteredContacts} />
       </Box>
     </CssVarsProvider>
   )
