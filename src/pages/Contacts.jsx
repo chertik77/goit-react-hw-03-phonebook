@@ -51,7 +51,7 @@ const Contacts = () => {
           </Box>
           {pathname === '/contacts' ? (
             <>
-              <Main items={filteredContacts} filter={setFilter} />
+              <Main items={filteredContacts} filter={filter} setFilter={setFilter} />
               <MainMobile items={filteredContacts} />
             </>
           ) : (

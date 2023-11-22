@@ -1,13 +1,14 @@
-import { Sheet, Typography } from '@mui/joy'
-import { Link } from 'react-router-dom'
+import { Link, Sheet, Typography } from '@mui/joy'
+import { Else, If, Then } from 'react-if'
+import { Link as RouteLink } from 'react-router-dom'
 import { Filter } from './Filter'
 import { ContactsTable } from './Table'
 
-export const Main = ({ items, filter }) => (
+export const Main = ({ items, filter, setFilter }) => (
   <>
-    <Filter onChange={filter} />
-    {items()?.length > 0 ? (
-      <>
+    <Filter onChange={setFilter} filter={filter} />
+    <If condition={items()?.length > 0}>
+      <Then>
         <Sheet
           variant='outlined'
           sx={{
@@ -20,17 +21,20 @@ export const Main = ({ items, filter }) => (
           }}>
           <ContactsTable items={items} />
         </Sheet>
-      </>
-    ) : (
-      <>
-        <Typography variant='h3'>You dont have any contacts...</Typography>
-        <Typography variant='h3'>
-          Add someone to start by{' '}
-          <Link to='create' className='text-blue-400 underline'>
-            clicking here
-          </Link>
-        </Typography>
-      </>
-    )}
+      </Then>
+      <Else>
+        <If condition={filter === ''}>
+          <Typography variant='h3'>
+            Add someone to start by{' '}
+            <Link to='create' component={RouteLink}>
+              clicking here
+            </Link>
+          </Typography>
+          <Else>
+            <Typography variant='h3'>We didnt find any contacts based on your query...</Typography>
+          </Else>
+        </If>
+      </Else>
+    </If>
   </>
 )
