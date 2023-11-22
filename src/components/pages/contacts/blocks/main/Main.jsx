@@ -1,13 +1,15 @@
 import { Link, Sheet, Typography } from '@mui/joy'
 import { Link as RouteLink } from 'react-router-dom'
-import { Filter } from './Filter'
+import { Filter } from '../Filter'
 import { ContactsTable } from './Table'
 
 export const Main = ({ contacts, filter, setFilter }) => (
   <>
     <Filter onChange={setFilter} filter={filter} />
     {contacts()?.length > 0 ? (
-      <Sheet variant='outlined' sx={{ display: { xs: 'none', lg: 'initial' }, borderRadius: 'sm' }}>
+      <Sheet
+        variant='outlined'
+        sx={{ display: { xs: 'none', lg: 'initial' }, borderRadius: 'sm', width: 800, mt: 4 }}>
         <ContactsTable contacts={contacts} />
       </Sheet>
     ) : filter === '' ? (

@@ -5,12 +5,12 @@ export const ContactsTable = ({ contacts }) => (
   <Table
     aria-labelledby='tableTitle'
     hoverRow
-    sx={{ '--TableRow-hoverBackground': 'var(--joy-palette-background-level1)' }}>
+    sx={{ '--TableRow-hoverBackground': 'var(--joy-palette-background-level1)', width: 800 }}>
     <thead>
       <tr>
-        <th style={{ width: 500, padding: '12px 30px' }}>Name</th>
-        <th style={{ width: 500, padding: '12px 6px' }}>Number</th>
-        <th style={{ width: 70, padding: '12px 6px' }}>Menu</th>
+        <th style={{ width: 150, padding: '12px 30px' }}>Name</th>
+        <th style={{ width: 150, padding: '12px 6px' }}>Number</th>
+        <th style={{ width: 30, padding: '12px 6px' }}>Menu</th>
       </tr>
     </thead>
     <tbody>

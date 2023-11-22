@@ -2,7 +2,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { Box, FormControl, FormLabel, Input } from '@mui/joy'
 
 export const Filter = ({ onChange, filter }) => (
-  <Box sx={{ borderRadius: 'sm', py: 2, width: 284 }}>
+  <Box sx={{ borderRadius: 'sm', py: 2, width: 284, mt: 2 }}>
     <FormControl size='sm'>
       <FormLabel>Search for contact</FormLabel>
       <Input
