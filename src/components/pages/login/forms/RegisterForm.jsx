@@ -21,8 +21,8 @@ export const RegisterForm = () => {
     resolver: yupResolver(createValidationSchema(['name', 'email', 'signuppassword']))
   })
 
-  const submit = async ({ email, signuppassword: password }) => {
-    await signup({ email, password })
+  const submit = async ({ name, email, signuppassword: password }) => {
+    await signup({ name, email, password })
     reset()
   }
 
