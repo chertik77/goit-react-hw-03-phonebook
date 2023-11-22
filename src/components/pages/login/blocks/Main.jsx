@@ -5,9 +5,9 @@ import { RegisterForm } from '../forms/RegisterForm'
 
 export const Main = () => {
   const [isSignUp, setIsSignUp] = useState(false)
+
   return (
     <Box
-      component='main'
       sx={{
         my: 'auto',
         py: 2,

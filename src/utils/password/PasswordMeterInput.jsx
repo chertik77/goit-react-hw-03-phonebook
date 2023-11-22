@@ -10,9 +10,8 @@ export const PasswordMeterInput = forwardRef(({ onChange, value, ...props }, ref
   }, [value])
 
   const handleChange = e => {
-    const newValue = e.target.value
-    setLocalValue(newValue)
-    onChange(newValue)
+    setLocalValue(e.target.value)
+    onChange(e.target.value)
   }
 
   const strength = calculatePasswordStrength(localValue)

@@ -1,5 +1,4 @@
-import DarkModeRoundedIcon from '@mui/icons-material/DarkModeRounded'
-import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded'
+import { DarkModeRounded, LightModeRounded } from '@mui/icons-material'
 import { IconButton, useColorScheme } from '@mui/joy'
 
 export const ColorSchemeToggle = () => {
@@ -13,7 +12,7 @@ export const ColorSchemeToggle = () => {
       color='neutral'
       aria-label='toggle light/dark mode'
       onClick={() => (mode === 'light' ? setMode('dark') : setMode('light'))}>
-      {mode === 'light' ? <DarkModeRoundedIcon /> : <LightModeRoundedIcon />}
+      {mode === 'light' ? <DarkModeRounded /> : <LightModeRounded />}
     </IconButton>
   )
 }

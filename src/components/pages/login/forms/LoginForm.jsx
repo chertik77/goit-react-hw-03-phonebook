@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, Stack } from '@mui/joy'
-import { FormInput } from 'components/pages/contacts/FormInput'
-import { Form, useForm } from 'react-hook-form'
+import { FormInput } from 'components/FormInput'
+import { useForm } from 'react-hook-form'
 import { useLoginMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
 import { RequestError } from 'utils/ui/ErrorMessage'
@@ -10,19 +10,18 @@ export const LoginForm = () => {
   const [login, { isLoading, error }] = useLoginMutation()
   const {
     reset,
-    control,
     register,
+    handleSubmit,
     formState: { errors, isValid }
   } = useForm({ mode: 'onChange', resolver: yupResolver(createValidationSchema(['email', 'loginpassword'])) })
 
+  const submit = async ({ email, loginpassword: password }) => {
+    await login({ email, password })
+    reset()
+  }
+
   return (
-    <Form
-      control={control}
-      autoComplete='on'
-      onSubmit={async ({ data: { email, loginpassword: password } }) => {
-        await login({ email, password })
-        reset()
-      }}>
+    <form autoComplete='on' onSubmit={handleSubmit(submit)}>
       <FormInput
         label='Email'
         type='email'
@@ -45,6 +44,6 @@ export const LoginForm = () => {
           Sign in
         </Button>
       </Stack>
-    </Form>
+    </form>
   )
 }

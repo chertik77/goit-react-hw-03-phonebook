@@ -1,12 +1,10 @@
-import MoreHorizRounded from '@mui/icons-material/MoreHorizRounded'
+import { MoreHorizRounded } from '@mui/icons-material'
 import { Box, Divider, Dropdown, IconButton, Menu, MenuButton, MenuItem } from '@mui/joy'
 
 export const MainMenu = () => (
-  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
     <Dropdown>
-      <MenuButton
-        slots={{ root: IconButton }}
-        slotProps={{ root: { variant: 'plain', color: 'neutral', size: 'sm' } }}>
+      <MenuButton slots={{ root: IconButton }}>
         <MoreHorizRounded />
       </MenuButton>
       <Menu size='sm' sx={{ minWidth: 140 }}>

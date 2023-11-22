@@ -1,8 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { InfoOutlined } from '@mui/icons-material'
 import { Button, FormControl, FormHelperText, FormLabel, Stack } from '@mui/joy'
-import { FormInput } from 'components/pages/contacts/FormInput'
-import { Controller, Form, useForm } from 'react-hook-form'
+import { FormInput } from 'components/FormInput'
+import { Controller, useForm } from 'react-hook-form'
 import { useSignupMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
 import { PasswordMeterInput } from 'utils/password/PasswordMeterInput'
@@ -12,22 +12,22 @@ export const RegisterForm = () => {
   const [signup, { isLoading, error }] = useSignupMutation()
   const {
     reset,
-    control,
+    handleSubmit,
     register,
+    control,
     formState: { errors, isValid }
   } = useForm({
     mode: 'onChange',
     resolver: yupResolver(createValidationSchema(['name', 'email', 'signuppassword']))
   })
 
+  const submit = async ({ email, signuppassword: password }) => {
+    await signup({ email, password })
+    reset()
+  }
+
   return (
-    <Form
-      autoComplete='on'
-      control={control}
-      onSubmit={async ({ data: { name, email, signuppassword: password } }) => {
-        await signup({ name, email, password })
-        reset()
-      }}>
+    <form autoComplete='on' onSubmit={handleSubmit(submit)}>
       <FormInput
         error={error?.name}
         label='Name'
@@ -64,6 +64,6 @@ export const RegisterForm = () => {
           Sign up
         </Button>
       </Stack>
-    </Form>
+    </form>
   )
 }

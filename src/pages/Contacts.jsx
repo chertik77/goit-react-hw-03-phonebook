@@ -33,8 +33,8 @@ export default function Contacts() {
           <Typography level='h2' sx={{ my: 1 }}>
             Contacts
           </Typography>
-          <Main items={filteredContacts} filter={filter} setFilter={setFilter} />
-          <MainMobile items={filteredContacts} />
+          <Main contacts={filteredContacts} filter={filter} setFilter={setFilter} />
+          <MainMobile contacts={filteredContacts} />
         </Box>
       </Box>
     </CssVarsProvider>
