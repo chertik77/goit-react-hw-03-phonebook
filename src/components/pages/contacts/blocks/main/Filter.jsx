@@ -18,7 +18,7 @@ export const Filter = ({ onChange, filter }) => (
         placeholder='Search'
         value={filter}
         startDecorator={<SearchIcon />}
-        onChange={e => onChange(e.target.value)}
+        onChange={e => onChange(e.target.value.trim())}
       />
     </FormControl>
   </Box>
