@@ -3,7 +3,6 @@ import { toggleSidebar } from 'utils/helpers/toggleSidebar'
 
 export const SidebarOverlay = () => (
   <Box
-    className='Sidebar-overlay'
     sx={{
       position: 'fixed',
       zIndex: 9998,
@@ -11,7 +10,7 @@ export const SidebarOverlay = () => (
       left: 0,
       width: '100vw',
       height: '100vh',
-      opacity: 'var(--SideNavigation-slideIn)',
+      opacity: 1,
       backgroundColor: 'var(--joy-palette-background-backdrop)',
       transition: 'opacity 0.4s',
       transform: {

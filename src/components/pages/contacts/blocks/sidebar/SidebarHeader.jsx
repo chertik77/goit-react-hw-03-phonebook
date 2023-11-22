@@ -4,10 +4,10 @@ import { ColorSchemeToggle } from 'utils/ui/ColorShemeToggle'
 
 export const SidebarHeader = () => (
   <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
-    <IconButton variant='soft' color='primary' size='sm'>
+    <IconButton color='primary' size='sm'>
       <BadgeRounded />
     </IconButton>
     <Typography level='title-lg'>PhoneBook</Typography>
-    <ColorSchemeToggle sx={{ ml: 'auto' }} />
+    <ColorSchemeToggle />
   </Box>
 )

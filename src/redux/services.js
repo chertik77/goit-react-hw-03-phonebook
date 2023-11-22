@@ -35,6 +35,5 @@ export const {
   useAddNewContactMutation,
   useSignupMutation,
   useLoginMutation,
-  useCurrentUserQuery,
   useLogoutMutation
 } = contactsApi

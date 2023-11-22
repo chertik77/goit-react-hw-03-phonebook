@@ -8,7 +8,7 @@ const handleUserFullfilled = (state, action) => {
 }
 
 const authSlice = createSlice({
-  name: 'users',
+  name: 'user',
   initialState: {
     user: { name: null, email: null },
     token: null,

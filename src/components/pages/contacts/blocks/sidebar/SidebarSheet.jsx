@@ -2,7 +2,6 @@ import { Sheet } from '@mui/joy'
 
 export const SidebarSheet = ({ children }) => (
   <Sheet
-    className='Sidebar'
     sx={{
       position: { xs: 'fixed', md: 'sticky' },
       transform: {
@@ -15,7 +14,6 @@ export const SidebarSheet = ({ children }) => (
       width: 'var(--Sidebar-width)',
       top: 0,
       p: 2,
-      flexShrink: 0,
       display: 'flex',
       flexDirection: 'column',
       gap: 2,

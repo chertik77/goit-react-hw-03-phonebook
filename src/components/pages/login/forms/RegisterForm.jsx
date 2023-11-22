@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { InfoOutlined } from '@mui/icons-material'
-import { Button, FormControl, FormHelperText, FormLabel, Input, Stack } from '@mui/joy'
+import { Button, FormControl, FormHelperText, FormLabel, Stack } from '@mui/joy'
+import { FormInput } from 'components/pages/contacts/FormInput'
 import { Controller, Form, useForm } from 'react-hook-form'
 import { useSignupMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
@@ -27,26 +28,22 @@ export const RegisterForm = () => {
         await signup({ name, email, password })
         reset()
       }}>
-      <FormControl error={Boolean(errors?.name)}>
-        <FormLabel>Name</FormLabel>
-        <Input type='text' {...register('name')} autoComplete='given-name' />
-        {errors?.name && (
-          <FormHelperText>
-            <InfoOutlined />
-            {errors.name.message}
-          </FormHelperText>
-        )}
-      </FormControl>
-      <FormControl error={Boolean(errors?.email)}>
-        <FormLabel>Email</FormLabel>
-        <Input type='email' {...register('email')} autoComplete='email' />
-        {errors?.email && (
-          <FormHelperText>
-            <InfoOutlined />
-            {errors.email.message}
-          </FormHelperText>
-        )}
-      </FormControl>
+      <FormInput
+        error={error?.name}
+        label='Name'
+        register={register('name')}
+        autoComplete='given-name'
+        type='text'
+        helperText={errors?.name?.message}
+      />
+      <FormInput
+        error={error?.email}
+        label='Email'
+        register={register('email')}
+        autoComplete='email'
+        type='email'
+        helperText={errors?.email?.message}
+      />
       <FormControl error={Boolean(errors?.signuppassword)}>
         <FormLabel>Password</FormLabel>
         <Controller

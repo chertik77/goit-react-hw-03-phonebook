@@ -1,7 +1,7 @@
 import { calculatePasswordStrength } from 'utils/password/calculatePasswordStrength'
 import { object, string } from 'yup'
 
-const PHONE_NUMBER_LENGTH = 10
+const PHONE_NUMBER_LENGTH = 9
 
 const validationSchemas = {
   name: string()

@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { InfoOutlined } from '@mui/icons-material'
-import { Button, FormControl, FormHelperText, FormLabel, Input, Stack } from '@mui/joy'
+import { Button, Stack } from '@mui/joy'
+import { FormInput } from 'components/pages/contacts/FormInput'
 import { Form, useForm } from 'react-hook-form'
 import { useLoginMutation } from 'redux/services'
 import { createValidationSchema } from 'utils/helpers/validationSchema'
@@ -23,31 +23,22 @@ export const LoginForm = () => {
         await login({ email, password })
         reset()
       }}>
-      <FormControl error={Boolean(errors?.email)}>
-        <FormLabel>Email</FormLabel>
-        <Input type='email' name='email' {...register('email')} autoComplete='email' />
-        {errors?.email && (
-          <FormHelperText>
-            <InfoOutlined />
-            {errors.email.message}
-          </FormHelperText>
-        )}
-      </FormControl>
-      <FormControl error={Boolean(errors?.loginpassword)}>
-        <FormLabel>Password</FormLabel>
-        <Input
-          type='password'
-          name='password'
-          {...register('loginpassword')}
-          autoComplete='current-password'
-        />
-        {errors?.loginpassword && (
-          <FormHelperText>
-            <InfoOutlined />
-            {errors.loginpassword.message}
-          </FormHelperText>
-        )}
-      </FormControl>
+      <FormInput
+        label='Email'
+        type='email'
+        register={register('email')}
+        error={errors?.email}
+        helperText={errors?.email?.message}
+        autoComplete='email'
+      />
+      <FormInput
+        label='Password'
+        type='password'
+        register={register('loginpassword')}
+        error={errors?.loginpassword}
+        helperText={errors?.loginpassword?.message}
+        autoComplete='current-password'
+      />
       <Stack sx={{ mt: 2, gap: 2 }}>
         <RequestError error={error} type='login' />
         <Button type='submit' fullWidth loading={isLoading} disabled={!isValid}>

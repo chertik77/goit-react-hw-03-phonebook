@@ -1,7 +1,6 @@
-import { Divider, GlobalStyles } from '@mui/joy'
+import { Box, Divider, GlobalStyles } from '@mui/joy'
 import { SidebarFooter } from './SidebarFooter'
 import { SidebarHeader } from './SidebarHeader'
-import { SidebarList } from './SidebarList'
 import { SidebarOverlay } from './SidebarOverlay'
 import { SidebarSheet } from './SidebarSheet'
 
@@ -18,7 +17,7 @@ export const Sidebar = () => (
     <SidebarOverlay />
     <SidebarHeader />
     <Divider />
-    <SidebarList />
+    <Box sx={{ flexGrow: 1 }} />
     <Divider />
     <SidebarFooter />
   </SidebarSheet>
